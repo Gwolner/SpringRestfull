@@ -1,28 +1,101 @@
 # Consumo da API Spring Restful
 
+## :white_check_mark: Endereco
+
+### - Inserir `POST` | `/Endereco`
+
+Enviar: 
+```json
+{
+  "logradouro": "Rua Universo da Loucura",
+  "numero": "616",
+  "bairro": "Sanctum",
+  "cidade": "Nova Iorque",
+  "estado": "PE",
+  "cep": "54.210-081"
+}
+```
+
+### - Atualizar `PUT` | `/Endereco` 
+
+Enviar: 
+```json
+{
+  "id": "4",
+  "logradouro": "Rua Temilson Xavier",
+  "numero": "87",
+  "bairro": "Coque",
+  "cidade": "Recife",
+  "estado": "PE",
+  "cep": "54.270-081"
+}
+```
+
+### - Ler `GET` | `/Endereco/{id}`
+
+Retorno sucesso:
+```json
+{
+  "id": 4,
+  "logradouro": "Rua Temilson Xavier",
+  "numero": "87",
+  "bairro": "Coque",
+  "cidade": "Pina",
+  "estado": "PE",
+  "cep": "54.270-081"
+}
+```
+
+### - Deletar `DELETE` | `/Endereco /{id}`
+
+### - Ler Todos `GET` | `/Endereco `
+
+Retorno sucesso:
+```json
+[
+  {
+    "id": 1,
+    "logradouro": "Rua Universo da Loucura",
+    "numero": "616",
+    "bairro": "Sanctum",
+    "cidade": "Nova Iorque",
+    "estado": "PE",
+    "cep": "54.210-081"
+  },
+  {
+    "id": 2,
+    "logradouro": "Rua De volta ao lar",
+    "numero": "888",
+    "bairro": "Miranha",
+    "cidade": "Nova Iorque",
+    "estado": "PE",
+    "cep": "54.270-081"
+  },
+  {
+    "id": 4,
+    "logradouro": "Rua Temilson Xavier",
+    "numero": "87",
+    "bairro": "Coque",
+    "cidade": "Pina",
+    "estado": "PE",
+    "cep": "54.270-081"
+  }
+]
+```
+
 ## :white_check_mark: Servico
 
-### :green_square: Inserir
+### - Inserir `POST` | `/Servico`
 
-`POST` | `/Servico` <br>
 Enviar: 
 ```json
 {
  "designacao":"Abrigo"
 }
 ```
-Retorno sucesso:
-```json
-Snipet
-```
-Retorno falha:
-```json
-Snipet
-```
 
-### :green_square: Atualizar
+### - Atualizar `PUT` | `/Servico`
 
-`PUT` | `/Servico` <br>
 Enviar: 
 ```json
 {
@@ -30,57 +103,18 @@ Enviar:
  "designacao":"Abrigo"
 }
 ```
-Retorno sucesso:
-```json
-Snipet
-```
-Retorno falha:
-```json
-Snipet
-```
 
-### :green_square: Ler
+### - Ler `GET` | `/Servico/{id}`
 
-`GET` | `/Servico/{id}` <br>
 Enviar: 
 ```json
 Snipet
 ```
-Retorno sucesso:
-```json
-{
- "id": 1,
- "designacao": "Abrigo"
-}
-```
-Retorno falha:
-```json
-Snipet
-```
 
-### :green_square: Deletar
+### - Deletar `DELETE` | `/Servico/{id}`
 
-`DELETE` | `/Servico/{id}` <br>
-Enviar: 
-```json
-Snipet
-```
-Retorno sucesso:
-```json
-Snipet
-```
-Retorno falha:
-```json
-Snipet
-```
+### - Ler Todos `GET` | `/Servico`
 
-### :green_square: LerTodos
-
-`GET` | `/Servico` <br>
-Enviar: 
-```json
-Snipet
-```
 Retorno sucesso:
 ```json
 [
@@ -93,25 +127,4 @@ Retorno sucesso:
   "designacao": "Abrigo"
  }
 ]
-```
-Retorno falha:
-```json
-Snipet
-```
-
-===COPIA============
-
-Link: /Servico/{id}  <br>
-Requisição: DELETE <br>
-Enviar: 
-```json
-Snipet
-```
-Retorno sucesso:
-```json
-Snipet
-```
-Retorno falha:
-```json
-Snipet
 ```
