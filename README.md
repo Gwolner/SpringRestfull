@@ -2,7 +2,7 @@
 
 ## :white_check_mark: Endereco
 
-### - Inserir `POST` | `/Endereco`
+### Inserir `POST` | `/Endereco`
 
 Enviar: 
 ```json
@@ -16,7 +16,7 @@ Enviar:
 }
 ```
 
-### - Atualizar `PUT` | `/Endereco` 
+### Atualizar `PUT` | `/Endereco` 
 
 Enviar: 
 ```json
@@ -31,9 +31,9 @@ Enviar:
 }
 ```
 
-### - Ler `GET` | `/Endereco/{id}`
+### Ler `GET` | `/Endereco/{id}`
 
-Retorno sucesso:
+Retorno:
 ```json
 {
   "id": 4,
@@ -46,11 +46,11 @@ Retorno sucesso:
 }
 ```
 
-### - Deletar `DELETE` | `/Endereco /{id}`
+### Deletar `DELETE` | `/Endereco /{id}`
 
-### - Ler Todos `GET` | `/Endereco `
+### Ler Todos `GET` | `/Endereco `
 
-Retorno sucesso:
+Retorno:
 ```json
 [
   {
@@ -85,7 +85,7 @@ Retorno sucesso:
 
 ## :white_check_mark: Servico
 
-### - Inserir `POST` | `/Servico`
+### Inserir `POST` | `/Servico`
 
 Enviar: 
 ```json
@@ -94,7 +94,7 @@ Enviar:
 }
 ```
 
-### - Atualizar `PUT` | `/Servico`
+### Atualizar `PUT` | `/Servico`
 
 Enviar: 
 ```json
@@ -104,18 +104,21 @@ Enviar:
 }
 ```
 
-### - Ler `GET` | `/Servico/{id}`
+### Ler `GET` | `/Servico/{id}`
 
-Enviar: 
+Retorno: 
 ```json
-Snipet
+{
+  "id": 1,
+  "designacao": "Abrigo"
+}
 ```
 
-### - Deletar `DELETE` | `/Servico/{id}`
+### Deletar `DELETE` | `/Servico/{id}`
 
-### - Ler Todos `GET` | `/Servico`
+### Ler Todos `GET` | `/Servico`
 
-Retorno sucesso:
+Retorno:
 ```json
 [
  {
