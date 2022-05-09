@@ -1,92 +1,87 @@
-# spring-restfull
+# Consumo da API Spring Restful
 
+## :white_check_mark: Servico
 
-# Consumo da API
+### :green_square: Inserir
 
-## Servico 
-
-### Inserir
-
-Link: /Servico
-Requisição: POST
-
-Mandar 
+`POST` | `/Servico` <br>
+Enviar: 
 ```json
 {
  "designacao":"Abrigo"
 }
 ```
-
-Receber
+Retorno sucesso:
+```json
+Snipet
+```
+Retorno falha:
 ```json
 Snipet
 ```
 
-### Atualizar
+### :green_square: Atualizar
 
-Link: /Servico
-Requisição: PUT
-
-Mandar 
+`PUT` | `/Servico` <br>
+Enviar: 
 ```json
 {
  "id":"1",
  "designacao":"Abrigo"
 }
 ```
-
-Receber
+Retorno sucesso:
 ```json
 Snipet
-
 ```
-
-### Ler
-
-Link: /Servico/{id}
-Requisição: GET
-
-Mandar 
+Retorno falha:
 ```json
 Snipet
 ```
 
-Receber
+### :green_square: Ler
+
+`GET` | `/Servico/{id}` <br>
+Enviar: 
+```json
+Snipet
+```
+Retorno sucesso:
 ```json
 {
  "id": 1,
  "designacao": "Abrigo"
 }
-
 ```
-
-### Deletar
-
-Link: /Servico/{id}
-Requisição: DELETE
-
-Mandar 
+Retorno falha:
 ```json
 Snipet
 ```
 
-Receber
-```json
-Snipet
+### :green_square: Deletar
 
-```
-
-###LerTodos
-
-Link: /Servico
-Requisição: GET
-
-Mandar 
+`DELETE` | `/Servico/{id}` <br>
+Enviar: 
 ```json
 Snipet
 ```
+Retorno sucesso:
+```json
+Snipet
+```
+Retorno falha:
+```json
+Snipet
+```
 
-Receber
+### :green_square: LerTodos
+
+`GET` | `/Servico` <br>
+Enviar: 
+```json
+Snipet
+```
+Retorno sucesso:
 ```json
 [
  {
@@ -98,18 +93,25 @@ Receber
   "designacao": "Abrigo"
  }
 ]
-
+```
+Retorno falha:
+```json
+Snipet
 ```
 
 ===COPIA============
 
-Link: 
-
-Mandar 
+Link: /Servico/{id}  <br>
+Requisição: DELETE <br>
+Enviar: 
 ```json
 Snipet
 ```
-
-Receber
+Retorno sucesso:
 ```json
 Snipet
+```
+Retorno falha:
+```json
+Snipet
+```
