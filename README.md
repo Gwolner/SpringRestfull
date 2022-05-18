@@ -1,9 +1,5 @@
 # Consumo da API Spring Restful
 
-## :white_check_mark: Acolhido
-
-
-
 ## :white_check_mark: Servico
 
 ### Inserir `POST` | `/Servico`
@@ -52,3 +48,5 @@ Retorno:
  }
 ]
 ```
+
+## :white_check_mark: Acolhido
