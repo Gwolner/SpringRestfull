@@ -33,7 +33,7 @@ Retorno:
 
 ### Deletar `DELETE` | `/Servico/{id}`
 
-### Ler Todos `GET` | `/Servico`
+### Ler Todos `GET` | `/Servicos`
 
 Retorno:
 ```json
