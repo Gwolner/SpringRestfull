@@ -70,3 +70,110 @@ Enviar:
 }
 ```
 
+### Atualizar `PUT` | `/Acolhido`
+
+Enviar: 
+```json
+{
+	"cpf": "111.111.111-11",
+	"rg": "8.147.598",
+	"nome": "Bruce Wayne",
+	"tipoContato": "Whatssap",
+	"contato": "(81)945875236",
+	"dataNascimento": "12/05/1996",
+	"coordenada": {
+		"id": 13,
+		"longitude": "5",
+		"latitude": "5"
+	}
+}
+```
+
+Ou enviar: 
+```json
+{
+	"cpf": "111.111.111-11",
+	"rg": "8.147.598",
+	"nome": "Bruce Wayne",
+	"tipoContato": "Whatssap",
+	"contato": "(81)945875236",
+	"dataNascimento": "12/05/1996",
+	"coordenada": null
+}
+```
+
+### Ler `GET` | `Acolhido/{cpf}`
+
+Retorno:
+```json
+{
+	"cpf": "026.147.452-45",
+	"rg": "8.147.598",
+	"nome": "Bruce Wayne",
+	"tipoContato": "Telegram",
+	"contato": "(81)945875236",
+	"dataNascimento": "12/05/1996",
+	"coordenada": {
+		"id": 7,
+		"longitude": "22.17403",
+		"latitude": "66.40338"
+	}
+}
+```
+
+ou retorno: 
+```json
+{
+	"cpf": "111.111.111-11",
+	"rg": "8.147.598",
+	"nome": "Bruce Wayne",
+	"tipoContato": "Telegram",
+	"contato": "(81)945875236",
+	"dataNascimento": "12/05/1996",
+	"coordenada": null
+}
+```
+### Deletar `DELETE` | `Acolhido/{cpf}`
+
+### Ler Todos `GET` | `/Acolhidos`
+
+Retorno:
+```json
+[
+	{
+		"cpf": "026.147.452-45",
+		"rg": "8.147.598",
+		"nome": "Bruce Wayne",
+		"tipoContato": "Telegram",
+		"contato": "(81)945875236",
+		"dataNascimento": "12/05/1996",
+		"coordenada": {
+			"id": 7,
+			"longitude": "22.17403",
+			"latitude": "66.40338"
+		}
+	},
+	{
+		"cpf": "026.147.472-11",
+		"rg": "8.147.598",
+		"nome": "Bruce Wayne",
+		"tipoContato": "Telegram",
+		"contato": "(81)945875236",
+		"dataNascimento": "12/05/1996",
+		"coordenada": null
+	},
+	{
+		"cpf": "026.147.472-45",
+		"rg": "8.147.598",
+		"nome": "Bruce Wayne",
+		"tipoContato": "Telegram",
+		"contato": "(81)945875236",
+		"dataNascimento": "12/05/1996",
+		"coordenada": {
+			"id": 8,
+			"longitude": "22.17403",
+			"latitude": "66.40338"
+		}
+	}
+]
+```
