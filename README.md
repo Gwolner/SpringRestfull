@@ -69,6 +69,7 @@ Enviar:
   }
 }
 ```
+**Observação:** Para casos de Acolhido sem coordenadas, a Latitude e a Longitude devem apresentar o valor 0.
 
 ### Atualizar `PUT` | `/Acolhido`
 
