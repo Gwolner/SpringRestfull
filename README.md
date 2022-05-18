@@ -50,3 +50,23 @@ Retorno:
 ```
 
 ## :white_check_mark: Acolhido
+
+### Inserir `POST` | `/Acolhido`
+
+Enviar: 
+```json
+{
+	"cpf":"096.147.852-45",
+	"rg":"8.147.598",
+	"nome":"Bruce Wayne",
+	"tipoContato":"Telegram",
+	"contato":"(81)945875236",
+	"dataNascimento":"12/05/1996",
+	"coordenada":{
+		"id":"4",
+		"latitude":"66.40338",
+		"longitude":"22.17403"
+	}
+}
+```
+
