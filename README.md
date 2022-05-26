@@ -295,3 +295,176 @@ Retorno:
 ```
 
 ### Deletar `DELETE` | `Locais/{id}`
+
+## :white_check_mark: Instituicao
+
+### Inserir `POST` | `/Instituicao`
+
+Enviar: 
+```json
+{
+  "cnpj":"34303323000176",
+  "razaoSocial":"Elfos S/A",
+  "horarioAbertura":"08:00",
+  "horarioFechamento":"18:00",
+  "coordenada":{
+    "latitude":"0",
+    "longitude":"0"
+  },
+  "endereco":{
+    "logradouro":"Av. Anaquin Scaiuauquer",
+    "numero":"302",
+    "bairro":"Maranguape",
+    "cidade":"Fromhell",
+    "estado":"PE",
+    "cep":"88.170-009"
+  }
+}
+```
+
+### Ler `GET` | `/Instituicao/{cnpj}`
+
+Retorno: 
+```json
+{
+  "cnpj":"34303323000176",
+  "razaoSocial":"Elfos S/A",
+  "horarioAbertura":"08:00",
+  "horarioFechamento":"18:00",
+  "coordenada":{
+    "id":20,
+    "longitude":"0",
+    "latitude":"0"
+  },
+  "endereco":{
+    "id":19,
+    "logradouro":"Av. Anaquin Scaiuauquer",
+    "numero":"302",
+    "bairro":"Maranguape",
+    "cidade":"Fromhell",
+    "estado":"PE",
+    "cep":"88.170-009"
+  },
+  "comentarios":[
+    
+  ],
+  "descricoes":[
+    
+  ]
+}
+```
+
+### Atualizar `PUT` | `/Instituicao`
+
+Enviar: 
+```json
+{
+  "cnpj":"34303323000176",
+  "razaoSocial":"Magos e bruxas S/A",
+  "horarioAbertura":"18:00",
+  "horarioFechamento":"06:00",
+  "coordenada":{
+    "id":20,
+    "longitude":"58.47853",
+    "latitude":"98.75841"
+  },
+  "endereco":{
+    "id":19,
+    "logradouro":"Av. Imbiribeira",
+    "numero":"22",
+    "bairro":"Afogados",
+    "cidade":"Calypso",
+    "estado":"PE",
+    "cep":"88.170-009"
+  }
+}
+```
+
+### Ler Todos `GET` | `/Instituicoes`
+
+Retorno:
+```json
+[
+  {
+    "cnpj":"34303323000176",
+    "razaoSocial":"Elfos S/A",
+    "horarioAbertura":"08:00",
+    "horarioFechamento":"18:00",
+    "coordenada":{
+      "id":20,
+      "longitude":"0",
+      "latitude":"0"
+    },
+    "endereco":{
+      "id":19,
+      "logradouro":"Av. Anaquin Scaiuauquer",
+      "numero":"302",
+      "bairro":"Maranguape",
+      "cidade":"Fromhell",
+      "estado":"PE",
+      "cep":"88.170-009"
+    },
+    "comentarios":[
+      
+    ],
+    "descricoes":[
+      
+    ]
+  },
+  {
+    "cnpj":"34303323000178",
+    "razaoSocial":"Elfos S/A",
+    "horarioAbertura":"08:00",
+    "horarioFechamento":"18:00",
+    "coordenada":{
+      "id":23,
+      "longitude":"0",
+      "latitude":"0"
+    },
+    "endereco":{
+      "id":22,
+      "logradouro":"Av. Anaquin Scaiuauquer",
+      "numero":"302",
+      "bairro":"Maranguape",
+      "cidade":"Fromhell",
+      "estado":"PE",
+      "cep":"88.170-009"
+    },
+    "comentarios":[
+      
+    ],
+    "descricoes":[
+      
+    ]
+  },
+  {
+    "cnpj":"57303323000176",
+    "razaoSocial":"Elfos S/A",
+    "horarioAbertura":"08:00",
+    "horarioFechamento":"18:00",
+    "coordenada":{
+      "id":21,
+      "longitude":"0",
+      "latitude":"0"
+    },
+    "endereco":{
+      "id":20,
+      "logradouro":"Av. Anaquin Scaiuauquer",
+      "numero":"302",
+      "bairro":"Maranguape",
+      "cidade":"Fromhell",
+      "estado":"PE",
+      "cep":"88.170-009"
+    },
+    "comentarios":[
+      
+    ],
+    "descricoes":[
+      
+    ]
+  }
+]
+```
+
+### Deletar `DELETE` | `/Instituicao/{cnpj}`
+
