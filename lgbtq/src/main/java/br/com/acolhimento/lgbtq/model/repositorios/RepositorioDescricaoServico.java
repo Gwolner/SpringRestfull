@@ -22,7 +22,7 @@ public class RepositorioDescricaoServico implements Repositorio<DescricaoServico
 	}
 
 	@Override
-	public void inserir(DescricaoServico descricao) throws SQLException {
+	public int inserir(DescricaoServico descricao) throws SQLException {
 		// TODO Auto-generated method stub
 
 		String sql = "insert into descricao_servico"
@@ -45,7 +45,11 @@ public class RepositorioDescricaoServico implements Repositorio<DescricaoServico
 			pstm.setInt(3, descricao.getServico().getId());
 		}
 
-		pstm.execute();
+		if(pstm.execute()) {
+			return 1;
+		}else {
+			return 0;
+		}	
 	}
 
 	@Override

@@ -64,8 +64,8 @@ public class Fachada {
 	
 	
 	// ################# ENDERECO #################	
-	public void inserir(Endereco endereco) throws SQLException {
-		this.rEndereco.inserir(endereco);
+	public int inserir(Endereco endereco) throws SQLException {
+		return this.rEndereco.inserir(endereco);
 	}
 	
 	public void alterar(Endereco endereco) throws SQLException {
@@ -87,8 +87,8 @@ public class Fachada {
 	
 	
 	// ################# COORDENADA #################	
-	public void inserir(Coordenada coord) throws SQLException {
-		this.rCoordenada.inserir(coord);
+	public int inserir(Coordenada coord) throws SQLException {
+		return this.rCoordenada.inserir(coord);
 	}
 	
 	public void alterar(Coordenada coord) throws SQLException {

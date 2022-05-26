@@ -6,6 +6,10 @@ public class Coordenada {
 	private String longitude;
 	private String latitude;
 	
+	public Coordenada() {
+		this.id = 0;
+	}
+	
 	public int getId() {
 		return id;
 	}

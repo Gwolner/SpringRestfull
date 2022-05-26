@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS local (
   nome VARCHAR(45) NULL,
   link VARCHAR(45) NULL,
   descricao VARCHAR(45) NULL,
-  coordenada_id INT NOT NULL,
+  coordenada_id INT,
   endereco_id INT NOT NULL,
   PRIMARY KEY (id),
     FOREIGN KEY (endereco_id)
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS instituicao (
   razao_social VARCHAR(45) NULL,
   horario_abertura VARCHAR(45) NULL,
   horario_fechamento VARCHAR(45) NULL,
-  coordenada_id INT NOT NULL,
+  coordenada_id INT,
   endereco_id INT NOT NULL,
   PRIMARY KEY (cnpj),
     FOREIGN KEY (endereco_id)
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS instituicao (
   tipo_contato VARCHAR(45) NULL,
   contato VARCHAR(45) NULL,
   data_nascimento VARCHAR(45) NULL,
-  coordenada_id INT NOT NULL,
+  coordenada_id INT,
   PRIMARY KEY (cpf),
     FOREIGN KEY (coordenada_id)
     REFERENCES coordenada (id));

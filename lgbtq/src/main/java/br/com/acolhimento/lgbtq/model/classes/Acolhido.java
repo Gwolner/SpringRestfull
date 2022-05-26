@@ -10,6 +10,10 @@ public class Acolhido {
 	private String dataNascimento;
 	private Coordenada coordenada;
 	
+	public Acolhido() {
+		this.coordenada = new Coordenada();
+	}
+	
 	public String getCpf() {
 		return cpf;
 	}

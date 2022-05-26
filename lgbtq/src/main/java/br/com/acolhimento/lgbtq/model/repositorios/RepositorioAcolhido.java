@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.acolhimento.lgbtq.model.classes.Acolhido;
-import br.com.acolhimento.lgbtq.model.classes.Coordenada;
 
 public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 
@@ -19,12 +18,22 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 	}
 
 	@Override
-	public void inserir(Acolhido acolhido) throws SQLException {
+	public int inserir(Acolhido acolhido) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		String sql = "insert into acolhido "
-				+ "(cpf, rg, nome, tipo_contato, contato, data_nascimento, coordenada)"
-				+ "values (?,?,?,?,?,?,?)";
+		String sql;
+		
+		if(acolhido.getCoordenada().getId() > 0) {
+			//Salva com ID da Coordenada
+			sql = "insert into acolhido "
+					+ "(cpf, rg, nome, tipo_contato, contato, data_nascimento, coordenada_id)"
+					+ "values (?,?,?,?,?,?,?)";
+		}else {
+			//Salva NULL para a Coordenada
+			sql = "insert into acolhido "
+					+ "(cpf, rg, nome, tipo_contato, contato, data_nascimento)"
+					+ "values (?,?,?,?,?,?)";
+		}		
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		
@@ -35,14 +44,17 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 		pstm.setString(5, acolhido.getContato());
 		pstm.setString(6, acolhido.getDataNascimento());
 		
-		if(acolhido.getCoordenada() == null){
-			pstm.setInt(7, 0);
-		}else {			
+		//Adiciona o ID apenas se houver algum
+		if(acolhido.getCoordenada().getId() > 0) {
 			pstm.setInt(7, acolhido.getCoordenada().getId());
+		}
+		
+
+		if(pstm.execute()) {
+			return 1;
+		}else {
+			return 0;
 		}		
-		
-		pstm.execute();
-		
 	}
 
 	@Override
@@ -50,7 +62,7 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 		// TODO Auto-generated method stub
 		
 		String sql = "update acolhido "
-					+ "set rg=?, nome=?, tipo_contato=?, contato=?, data_nascimento=?, coordenada =?"
+					+ "set rg=?, nome=?, tipo_contato=?, contato=?, data_nascimento=?"
 					+ "where cpf=?";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
@@ -61,24 +73,15 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 		pstm.setString(4, acolhido.getContato());
 		pstm.setString(5, acolhido.getDataNascimento());
 		
-		if(acolhido.getCoordenada() == null){
-			pstm.setInt(6, 0);
-		}else {			
-			pstm.setInt(6, acolhido.getCoordenada().getId());
-		}
-		
-		pstm.setString(7, acolhido.getCpf());
+		pstm.setString(6, acolhido.getCpf());
 		
 		pstm.execute();
 	}
 
 	@Override
 	public Acolhido ler(String cpf) throws SQLException {
-		// TODO Auto-generated method stub
 		
-		//String sql = "select * from carro as c join tipocarro as t on (c.cod_tipocarro = t.codigo) where c.placa = ?";
-		String sql = "select * from acolhido as a join coordenada as c on (a.coordenada = c.id) where a.cpf = ?";
-		//String sql = "select * from acolhido where cpf = ?";
+		String sql = "select * from acolhido where cpf = ?";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		
@@ -99,21 +102,15 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 			acolhido.setContato(result.getString("contato"));
 			acolhido.setDataNascimento(result.getString("data_nascimento"));
 			
-			Coordenada coordenada = new Coordenada();
-			
-			coordenada.setId(result.getInt("id"));
-			coordenada.setLatitude(result.getString("latitude"));
-			coordenada.setLongitude(result.getString("longitude"));
-			
-			acolhido.setCoordenada(coordenada);
-		}
-		
+			if(result.getObject("coordenada_id") != null) {
+				acolhido.getCoordenada().setId(result.getInt("coordenada_id"));
+			}
+		}	
 		return acolhido;
 	}
 
 	@Override
 	public void deletar(String cpf) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "delete from acolhido where cpf=?";
 		
@@ -126,11 +123,8 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 
 	@Override
 	public List<Acolhido> lerTudo() throws SQLException {
-		// TODO Auto-generated method stub
-		
-		//String sql = "select * from carro as c join tipocarro as t on (c.cod_tipocarro = t.codigo)";
-		String sql = "select * from acolhido as a join coordenada as c on (a.coordenada = c.id)";
-		//String sql = "select * from acolhido";
+
+		String sql = "select * from acolhido";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		
@@ -149,17 +143,12 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 			acolhido.setContato(result.getString("contato"));
 			acolhido.setDataNascimento(result.getString("data_nascimento"));
 			
-			Coordenada coordenada = new Coordenada();
-			
-			coordenada.setId(result.getInt("id"));
-			coordenada.setLatitude(result.getString("latitude"));
-			coordenada.setLongitude(result.getString("longitude"));
-			
-			acolhido.setCoordenada(coordenada);
+			if(result.getObject("coordenada_id") != null) {
+				acolhido.getCoordenada().setId(result.getInt("coordenada_id"));
+			}
 			
 			acolhidos.add(acolhido);
 		}
-		
 		return acolhidos;
 	}
 }

@@ -22,7 +22,7 @@ public class RepositorioAlerta implements Repositorio<Alerta, Integer> {
 	}
 
 	@Override
-	public void inserir(Alerta alerta) throws SQLException {
+	public int inserir(Alerta alerta) throws SQLException {
 		// TODO Auto-generated method stub
 
 		String sql = "insert into alerta"
@@ -32,20 +32,14 @@ public class RepositorioAlerta implements Repositorio<Alerta, Integer> {
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 
 		pstm.setString(1, alerta.getStatus());
+		pstm.setString(2, alerta.getAcolhido().getCpf());
+		pstm.setString(3, alerta.getInstituicao().getCnpj());
 		
-		if(alerta.getAcolhido() == null){
-			pstm.setString(2, "Não informado");
-		}else {			
-			pstm.setString(2, alerta.getAcolhido().getCpf());
-		}
-		
-		if(alerta.getInstituicao() == null){
-			pstm.setString(3, "Não informado");
-		}else {			
-			pstm.setString(3, alerta.getInstituicao().getCnpj());
-		}
-
-		pstm.execute();
+		if(pstm.execute()) {
+			return 1;
+		}else {
+			return 0;
+		}	
 	}
 
 	@Override

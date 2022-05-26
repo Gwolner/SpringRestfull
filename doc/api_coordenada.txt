@@ -1,0 +1,52 @@
+================= Coordenada
+
+inserir
+POST | /Coordenada
+
+enviar:
+{
+	"latitude":"41.40338",
+	"longitude":"2.17403"
+}
+
+ler
+GET | /Coordenada/{id}
+
+recebe: 
+{
+	"id": 1,
+	"longitude": "2.17403",
+	"latitude": "41.40338"
+}
+
+Ler todas 
+GET | /Coordenada
+
+recebe:
+
+[
+	{
+		"id": 1,
+		"longitude": "2.17403",
+		"latitude": "41.40338"
+	},
+	{
+		"id": 2,
+		"longitude": "12.17403",
+		"latitude": "58.40338"
+	}
+]
+
+deletar 
+DELETE | /Coordenada/{id}
+
+atualizar
+PUT | /Coordenada
+
+enviar:
+
+{
+	"id":"4",
+	"latitude":"66.40338",
+	"longitude":"22.17403"
+}

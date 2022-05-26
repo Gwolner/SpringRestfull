@@ -15,6 +15,8 @@ public class Instituicao {
 	
 	
 	public Instituicao(){
+		this.coordenada = new Coordenada();
+		this.endereco = new Endereco();
 		this.comentarios = new ArrayList<ComentarioInstituicao>();
 		this.descricoes = new ArrayList<DescricaoServico>();
 	}

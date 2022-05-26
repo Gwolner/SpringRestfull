@@ -18,7 +18,7 @@ public class RepositorioComentarioInstituicao implements Repositorio<ComentarioI
 	}
 
 	@Override
-	public void inserir(ComentarioInstituicao comentarioInstituicao) throws SQLException {
+	public int inserir(ComentarioInstituicao comentarioInstituicao) throws SQLException {
 		// TODO Auto-generated method stub
 
 		String sql = "insert into comentario_instituicao (texto) values (?)";
@@ -27,7 +27,11 @@ public class RepositorioComentarioInstituicao implements Repositorio<ComentarioI
 
 		pstm.setString(1, comentarioInstituicao.getTexto());
 
-		pstm.execute();
+		if(pstm.execute()) {
+			return 1;
+		}else {
+			return 0;
+		}	
 	}
 
 	@Override

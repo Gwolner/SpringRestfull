@@ -1,0 +1,129 @@
+================= ACOLHIDO
+
+inserir
+
+POST | /Acolhido
+
+envia:
+{
+	"cpf":"096.147.852-45",
+	"rg":"8.147.598",
+	"nome":"Bruce Wayne",
+	"tipoContato":"Telegram",
+	"contato":"(81)945875236",
+	"dataNascimento":"12/05/1996",
+	"coordenada":{
+		"id":"4",
+		"latitude":"66.40338",
+		"longitude":"22.17403"
+	}
+}
+
+Alterar
+PUT | /Acolhido
+
+enviar:
+
+{
+	"cpf": "111.111.111-11",
+	"rg": "8.147.598",
+	"nome": "Bruce Wayne",
+	"tipoContato": "Whatssap",
+	"contato": "(81)945875236",
+	"dataNascimento": "12/05/1996",
+	"coordenada": {
+		"id": 13,
+		"longitude": "5",
+		"latitude": "5"
+	}
+}
+
+ou enviar:
+
+{
+	"cpf": "111.111.111-11",
+	"rg": "8.147.598",
+	"nome": "Bruce Wayne",
+	"tipoContato": "Whatssap",
+	"contato": "(81)945875236",
+	"dataNascimento": "12/05/1996",
+	"coordenada": null
+}
+
+ler
+GET | /Acolhido/{cpf}
+
+recebe:
+
+{
+	"cpf": "026.147.452-45",
+	"rg": "8.147.598",
+	"nome": "Bruce Wayne",
+	"tipoContato": "Telegram",
+	"contato": "(81)945875236",
+	"dataNascimento": "12/05/1996",
+	"coordenada": {
+		"id": 7,
+		"longitude": "22.17403",
+		"latitude": "66.40338"
+	}
+}
+
+ou recebe: 
+
+{
+	"cpf": "111.111.111-11",
+	"rg": "8.147.598",
+	"nome": "Bruce Wayne",
+	"tipoContato": "Telegram",
+	"contato": "(81)945875236",
+	"dataNascimento": "12/05/1996",
+	"coordenada": null
+}
+
+deletar
+DELETE | Acolhido/{cpf}
+
+ler todos
+GET | /Acolhidos
+
+recebe:
+
+[
+	{
+		"cpf": "026.147.452-45",
+		"rg": "8.147.598",
+		"nome": "Bruce Wayne",
+		"tipoContato": "Telegram",
+		"contato": "(81)945875236",
+		"dataNascimento": "12/05/1996",
+		"coordenada": {
+			"id": 7,
+			"longitude": "22.17403",
+			"latitude": "66.40338"
+		}
+	},
+	{
+		"cpf": "026.147.472-11",
+		"rg": "8.147.598",
+		"nome": "Bruce Wayne",
+		"tipoContato": "Telegram",
+		"contato": "(81)945875236",
+		"dataNascimento": "12/05/1996",
+		"coordenada": null
+	},
+	{
+		"cpf": "026.147.472-45",
+		"rg": "8.147.598",
+		"nome": "Bruce Wayne",
+		"tipoContato": "Telegram",
+		"contato": "(81)945875236",
+		"dataNascimento": "12/05/1996",
+		"coordenada": {
+			"id": 8,
+			"longitude": "22.17403",
+			"latitude": "66.40338"
+		}
+	}
+]
+

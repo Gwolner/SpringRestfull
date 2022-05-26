@@ -18,7 +18,7 @@ public class RepositorioServico implements Repositorio<Servico, Integer> {
 	}
 
 	@Override
-	public void inserir(Servico servico) throws SQLException {
+	public int inserir(Servico servico) throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = "insert into servico (designacao) values (?)";
 
@@ -26,7 +26,11 @@ public class RepositorioServico implements Repositorio<Servico, Integer> {
 		
 		pstm.setString(1, servico.getDesignacao());
 		
-		pstm.execute();	
+		if(pstm.execute()) {
+			return 1;
+		}else {
+			return 0;
+		}		
 	}
 
 	@Override

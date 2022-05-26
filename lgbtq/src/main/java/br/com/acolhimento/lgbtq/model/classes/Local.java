@@ -13,6 +13,8 @@ public class Local {
 	private ArrayList<ComentarioLocal> comentarios;
 	
 	public Local(){
+		this.coordenada = new Coordenada();
+		this.endereco = new Endereco();
 		this.comentarios = new ArrayList<ComentarioLocal>();
 	}
 

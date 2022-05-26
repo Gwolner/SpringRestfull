@@ -3,6 +3,7 @@ package br.com.acolhimento.lgbtq.model.repositorios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,18 +19,27 @@ public class RepositorioCoordenada implements Repositorio<Coordenada, Integer>{
 	}
 
 	@Override
-	public void inserir(Coordenada coordenada) throws SQLException {
+	public int inserir(Coordenada coordenada) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		String sql = "insert into coordenada (latitude,longitude) values (?,?)";
+		String sql = "insert into coordenada (latitude, longitude) values (?, ?)";
 		
-		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection()
+				.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		
 		pstm.setString(1, coordenada.getLatitude());
 		pstm.setString(2, coordenada.getLongitude());
 		
 		pstm.execute();
 		
+		int lastId = 0;
+		
+		final ResultSet rs = pstm.getGeneratedKeys();
+		if (rs.next()) {
+		    lastId = rs.getInt(1);
+		}
+		
+		return lastId;
 	}
 
 	@Override
@@ -44,6 +54,7 @@ public class RepositorioCoordenada implements Repositorio<Coordenada, Integer>{
 		
 		pstm.setString(1, coordenada.getLatitude());
 		pstm.setString(2, coordenada.getLongitude());
+		pstm.setInt(3, coordenada.getId());
 		
 		pstm.execute();
 	}

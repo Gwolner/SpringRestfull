@@ -3,6 +3,7 @@ package br.com.acolhimento.lgbtq.model.repositorios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +19,15 @@ public class RepositorioEndereco implements Repositorio<Endereco, Integer>{
 	}
 
 	@Override
-	public void inserir(Endereco endereco) throws SQLException {
+	public int inserir(Endereco endereco) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		String sql = "insert into endereco "
 				+ "(logradouro, numero, bairro, cidade, estado, cep)"
 				+ "values (?,?,?,?,?,?)";
 		
-		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection()
+				.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		
 		pstm.setString(1, endereco.getLogradouro());
 		pstm.setString(2, endereco.getNumero());
@@ -33,9 +35,17 @@ public class RepositorioEndereco implements Repositorio<Endereco, Integer>{
 		pstm.setString(4, endereco.getCidade());
 		pstm.setString(5, endereco.getEstado());
 		pstm.setString(6, endereco.getCep());
-
-		pstm.execute();
 		
+		pstm.execute();
+
+		int lastId = 0;
+		
+		final ResultSet rs = pstm.getGeneratedKeys();
+		if (rs.next()) {
+		    lastId = rs.getInt(1);
+		}
+		
+		return lastId;
 	}
 
 	@Override

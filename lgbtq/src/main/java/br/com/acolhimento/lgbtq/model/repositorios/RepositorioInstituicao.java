@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.acolhimento.lgbtq.model.classes.Endereco;
 import br.com.acolhimento.lgbtq.model.classes.Instituicao;
-import br.com.acolhimento.lgbtq.model.classes.Coordenada;
 
 public class RepositorioInstituicao  implements Repositorio<Instituicao, String>{
 
@@ -20,11 +18,11 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 	}
 
 	@Override
-	public void inserir(Instituicao instituicao) throws SQLException {
+	public int inserir(Instituicao instituicao) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		String sql = "insert into instituicao"
-			+ "(cnpj, razao_social, horario_abertura, horario_fechamento, coordenada, endereco) "
+			+ "(cnpj, razao_social, horario_abertura, horario_fechamento, coordenada_id, endereco_id) "
 			+ "values (?,?,?,?,?,?)";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
@@ -33,20 +31,14 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 		pstm.setString(2, instituicao.getRazaoSocial());
 		pstm.setString(3, instituicao.getHorarioAbertura());
 		pstm.setString(4, instituicao.getHorarioFechamento());
+		pstm.setInt(5, instituicao.getCoordenada().getId());
+		pstm.setInt(6, instituicao.getEndereco().getId());
 		
-		if(instituicao.getCoordenada() == null){
-			pstm.setInt(5, 0);
-		}else {			
-			pstm.setInt(5, instituicao.getCoordenada().getId());
-		}	
-		
-		if(instituicao.getEndereco() == null){
-			pstm.setInt(6, 0);
-		}else {			
-			pstm.setInt(6, instituicao.getEndereco().getId());
-		}	
-		
-		pstm.execute();
+		if(pstm.execute()) {
+			return 1;
+		}else {
+			return 0;
+		}
 		
 	}
 
@@ -70,47 +62,29 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 
 	@Override
 	public Instituicao ler(String cnpj) throws SQLException {
-		// TODO Auto-generated method stub
 		
-		String sql = "select * from instituicao as i join coordenada as c on (i.coordenada = c.id) where i.cnpj = ?";
-		//String sql = "select * from instituicao where cnpj = ?";
+		String sql = "select * from instituicao where cnpj = ?";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		
 		pstm.setString(1, cnpj);
 		
-		ResultSet result = pstm.executeQuery();
+		ResultSet result = pstm.executeQuery();		
 		
 		Instituicao instituicao = null;
 		
 		if(result.next()) {
-			
 			instituicao = new Instituicao();
 			
 			instituicao.setCnpj(result.getString("cnpj"));
 			instituicao.setRazaoSocial(result.getString("razao_social"));
-			instituicao.setHorarioAbertura(result.getString("horarioAbertura"));
-			instituicao.setHorarioFechamento(result.getString("horarioFechamento"));
-			
-			Coordenada coord = new Coordenada();
-			
-			coord.setId(result.getInt("id"));
-			coord.setLatitude(result.getString("latitude"));
-			coord.setLongitude(result.getString("longitude"));
-			
-			Endereco endereco = new Endereco();
-			
-			endereco.setId(result.getInt("id"));
-			endereco.setLogradouro(result.getString("logradouro"));
-			endereco.setNumero(result.getString("numero"));
-			endereco.setBairro(result.getString("bairro"));
-			endereco.setCidade(result.getString("cidade"));
-			endereco.setEstado(result.getString("estado"));
-			endereco.setCep(result.getString("cep"));
-			
-			instituicao.setCoordenada(coord);
-			instituicao.setEndereco(endereco);
+			instituicao.setHorarioAbertura(result.getString("horario_abertura"));
+			instituicao.setHorarioFechamento(result.getString("horario_fechamento"));
+			instituicao.getCoordenada().setId(result.getInt("coordenada_id"));
+			instituicao.getEndereco().setId(result.getInt("endereco_id"));
 		}
+		
+		System.out.println("instituicao: "+instituicao.getCnpj());
 		
 		return instituicao;
 	}
@@ -130,9 +104,7 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 
 	@Override
 	public List<Instituicao> lerTudo() throws SQLException {
-		// TODO Auto-generated method stub
 		
-//		String sql = "select * from carro as c join tipocarro as t on (c.cod_tipocarro = t.codigo)";
 		String sql = "select * from instituicao";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
@@ -147,28 +119,11 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 			
 			instituicao.setCnpj(result.getString("cnpj"));
 			instituicao.setRazaoSocial(result.getString("razao_social"));
-			instituicao.setHorarioAbertura(result.getString("horarioAbertura"));
-			instituicao.setHorarioFechamento(result.getString("horarioFechamento"));
-			
-			Coordenada coord = new Coordenada();
-			
-			coord.setId(result.getInt("id"));
-			coord.setLatitude(result.getString("latitude"));
-			coord.setLongitude(result.getString("longitude"));
-			
-			Endereco endereco = new Endereco();
-			
-			endereco.setId(result.getInt("id"));
-			endereco.setLogradouro(result.getString("logradouro"));
-			endereco.setNumero(result.getString("numero"));
-			endereco.setBairro(result.getString("bairro"));
-			endereco.setCidade(result.getString("cidade"));
-			endereco.setEstado(result.getString("estado"));
-			endereco.setCep(result.getString("cep"));
-			
-			instituicao.setCoordenada(coord);
-			instituicao.setEndereco(endereco);
-			
+			instituicao.setHorarioAbertura(result.getString("horario_abertura"));
+			instituicao.setHorarioFechamento(result.getString("horario_fechamento"));
+			instituicao.getCoordenada().setId(result.getInt("coordenada_id"));
+			instituicao.getEndereco().setId(result.getInt("endereco_id"));
+
 			instituicoes.add(instituicao);
 		}
 		

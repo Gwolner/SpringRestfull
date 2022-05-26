@@ -10,6 +10,10 @@ public class Endereco {
 	private String estado;
 	private String cep;
 	
+	public Endereco() {
+		this.id = 0;
+	}
+	
 	public int getId() {
 		return id;
 	}

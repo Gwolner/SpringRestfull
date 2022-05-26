@@ -80,7 +80,7 @@ public class ServicoRestController {
 		}
 	}
 	
-	@GetMapping("/Servico")
+	@GetMapping("/Servicos")
 	public ResponseEntity<List<Servico>> lerTodos(){
 		
 		try {
