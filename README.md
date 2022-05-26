@@ -321,6 +321,7 @@ Enviar:
   }
 }
 ```
+Observação: Para casos de Instituicao sem coordenadas, a Latitude e a Longitude devem apresentar o valor 0.
 
 ### Ler `GET` | `/Instituicao/{cnpj}`
 
