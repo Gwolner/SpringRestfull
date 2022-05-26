@@ -107,7 +107,7 @@ Enviar:
 	}
 }
 ```
-**Observação 1:** O CPF é enviado por ser uma PK. Não é permitido a alteração do CPF no banco de dados.
+**Observação 1:** O CPF é enviado por ser uma PK. Não é permitido a alteração do CPF no banco de dados. <br/>
 **Observação 2:** Para casos de Acolhido sem coordenadas, a Latitude e a Longitude devem apresentar o valor 0.
 
 ### Ler Todos `GET` | `/Acolhidos`
