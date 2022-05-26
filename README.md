@@ -75,17 +75,17 @@ Enviar:
 Retorno:
 ```json
 {
-	"cpf": "111.111.111-11",
-	"rg": "8.147.598",
-	"nome": "Bruce Wayne",
-	"tipoContato": "Telegram",
-	"contato": "(81)945875236",
-	"dataNascimento": "12/05/1996",
-	"coordenada": {
-		"id": 11,
-		"longitude": "22.17403",
-		"latitude": "66.40338"
-	}
+  "cpf":"111.111.111-11",
+  "rg":"8.147.598",
+  "nome":"Bruce Wayne",
+  "tipoContato":"Telegram",
+  "contato":"(81)945875236",
+  "dataNascimento":"12/05/1996",
+  "coordenada":{
+    "id":11,
+    "longitude":"22.17403",
+    "latitude":"66.40338"
+  }
 }
 ```
 
@@ -94,17 +94,17 @@ Retorno:
 Enviar: 
 ```json
 {
-	"cpf": "111.111.111-11",
-	"rg": "8.147.595",
-	"nome": "Bruce Wayne",
-	"tipoContato": "Telegram",
-	"contato": "(81)945875236",
-	"dataNascimento": "12/05/1996",
-	"coordenada": {
-		"id": 11,
-		"longitude": "11.17403",
-		"latitude": "66.40338"
-	}
+  "cpf":"111.111.111-11",
+  "rg":"8.147.595",
+  "nome":"Bruce Wayne",
+  "tipoContato":"Telegram",
+  "contato":"(81)945875236",
+  "dataNascimento":"12/05/1996",
+  "coordenada":{
+    "id":11,
+    "longitude":"11.17403",
+    "latitude":"66.40338"
+  }
 }
 ```
 **Observação 1:** O CPF é enviado por ser uma PK. Não é permitido a alteração do CPF no banco de dados. <br/>
@@ -115,45 +115,45 @@ Enviar:
 Retorno:
 ```json
 [
-	{
-		"cpf": "111.111.111-11",
-		"rg": "8.147.595",
-		"nome": "Bruce Wayne",
-		"tipoContato": "Telegram",
-		"contato": "(87)945875236",
-		"dataNascimento": "12/05/1996",
-		"coordenada": {
-			"id": 11,
-			"longitude": "53.1262",
-			"latitude": "17.1256"
-		}
-	},
-	{
-		"cpf": "333.111.111-11",
-		"rg": "8.147.598",
-		"nome": "Bruce Wayne",
-		"tipoContato": "Telegram",
-		"contato": "(81)945875236",
-		"dataNascimento": "12/05/1996",
-		"coordenada": {
-			"id": 12,
-			"longitude": "22.17403",
-			"latitude": "66.40338"
-		}
-	},
-	{
-		"cpf": "555.111.111-11",
-		"rg": "8.147.598",
-		"nome": "Uélintoum Nunes",
-		"tipoContato": "Telegram",
-		"contato": "(81)945875236",
-		"dataNascimento": "12/05/1996",
-		"coordenada": {
-			"id": 13,
-			"longitude": "0",
-			"latitude": "0"
-		}
-	}
+  {
+    "cpf":"111.111.111-11",
+    "rg":"8.147.595",
+    "nome":"Bruce Wayne",
+    "tipoContato":"Telegram",
+    "contato":"(87)945875236",
+    "dataNascimento":"12/05/1996",
+    "coordenada":{
+      "id":11,
+      "longitude":"53.1262",
+      "latitude":"17.1256"
+    }
+  },
+  {
+    "cpf":"333.111.111-11",
+    "rg":"8.147.598",
+    "nome":"Bruce Wayne",
+    "tipoContato":"Telegram",
+    "contato":"(81)945875236",
+    "dataNascimento":"12/05/1996",
+    "coordenada":{
+      "id":12,
+      "longitude":"22.17403",
+      "latitude":"66.40338"
+    }
+  },
+  {
+    "cpf":"555.111.111-11",
+    "rg":"8.147.598",
+    "nome":"Uélintoum Nunes",
+    "tipoContato":"Telegram",
+    "contato":"(81)945875236",
+    "dataNascimento":"12/05/1996",
+    "coordenada":{
+      "id":13,
+      "longitude":"0",
+      "latitude":"0"
+    }
+  }
 ]
 ```
 
