@@ -1,4 +1,4 @@
-# :white_check_mark: Comentario - Local
+## :white_check_mark: Comentario - Local
 
 ### Inserir `POST` | `/Local/Comentar`
 
@@ -33,7 +33,7 @@ Ocorre ao consultar todos os Locais
 ### Deletar `DELETE` | `/Local/Comentar/{id}`
 
 
-# :white_check_mark: Comentario - Instituicao
+## :white_check_mark: Comentario - Instituicao
 
 ### Inserir `POST` | `/Instituicao/Comentar`
 
