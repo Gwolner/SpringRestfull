@@ -706,3 +706,10 @@ Retorno:
 ```
 
 ### Deletar `DELETE` | `/Alerta/{id}`
+
+## :white_check_mark: Comentarios e Descricao 
+
+Para maiores detalhes, acesse os links abaixos:
+
+[Comentarios](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Comentarios.md). <br>
+[Descricao](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Descricao.md).
