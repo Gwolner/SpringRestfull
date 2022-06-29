@@ -20,7 +20,6 @@ public class RepositorioEndereco implements Repositorio<Endereco, Integer>{
 
 	@Override
 	public int inserir(Endereco endereco) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "insert into endereco "
 				+ "(logradouro, numero, bairro, cidade, estado, cep)"
@@ -50,7 +49,6 @@ public class RepositorioEndereco implements Repositorio<Endereco, Integer>{
 
 	@Override
 	public void alterar(Endereco endereco) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "update endereco "
 					+ "set logradouro=?, numero=?, bairro=?, cidade=?, estado=?, cep =?"
@@ -71,11 +69,8 @@ public class RepositorioEndereco implements Repositorio<Endereco, Integer>{
 
 	@Override
 	public Endereco ler(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
 		
-		//String sql = "select * from carro as c join tipocarro as t on (c.cod_tipocarro = t.codigo) where c.placa = ?";
 		String sql = "select * from endereco where id = ?";
-		//String sql = "select * from endereco where cpf = ?";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		
@@ -104,7 +99,6 @@ public class RepositorioEndereco implements Repositorio<Endereco, Integer>{
 
 	@Override
 	public void deletar(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "delete from endereco where id=?";
 		
@@ -117,11 +111,8 @@ public class RepositorioEndereco implements Repositorio<Endereco, Integer>{
 
 	@Override
 	public List<Endereco> lerTudo() throws SQLException {
-		// TODO Auto-generated method stub
-		
-		//String sql = "select * from carro as c join tipocarro as t on (c.cod_tipocarro = t.codigo)";
+
 		String sql = "select * from endereco";
-		//String sql = "select * from endereco";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		

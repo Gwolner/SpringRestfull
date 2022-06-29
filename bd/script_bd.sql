@@ -82,18 +82,18 @@ CREATE TABLE IF NOT EXISTS descricao_servico (
   id INT AUTO_INCREMENT,
   descricao VARCHAR(45) NULL,
   instituicao_cnpj VARCHAR(45) NOT NULL,
-  servicos_id INT NOT NULL,
+  servico_id INT NOT NULL,
   PRIMARY KEY (id),
     FOREIGN KEY (instituicao_cnpj)
     REFERENCES instituicao (cnpj),
-    FOREIGN KEY (servicos_id)
-    REFERENCES servicos (id));
+    FOREIGN KEY (servico_id)
+    REFERENCES servico (id));
 
 CREATE TABLE IF NOT EXISTS alerta (
   id INT AUTO_INCREMENT,
   status VARCHAR(45) NULL,
   acolhido_cpf VARCHAR(45) NOT NULL,
-  instituicao_cnpj VARCHAR(45) NOT NULL,
+  instituicao_cnpj VARCHAR(45),
   PRIMARY KEY (id),
     FOREIGN KEY (instituicao_cnpj)
     REFERENCES instituicao (cnpj),

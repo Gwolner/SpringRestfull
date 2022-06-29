@@ -21,15 +21,15 @@ import br.com.acolhimento.lgbtq.model.repositorios.Fachada;
 public class ServicoRestController {
 	
 	@PostMapping("/Servico")
-	public  ResponseEntity<?> inserir(@RequestBody Servico servico) {
+	public ResponseEntity<?> inserir(@RequestBody Servico servico) {
+		
+		int idServico;
 		
 		try {
-			Fachada.getCurrentInstance().inserir(servico);
+			idServico = Fachada.getCurrentInstance().inserir(servico);
 			
-//			return "Serviço cadastrado.";
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(idServico, HttpStatus.OK);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao inserir registro.");
 		}
 	}
@@ -40,10 +40,8 @@ public class ServicoRestController {
 		try {
 			Fachada.getCurrentInstance().alterar(servico);
 			
-//			return "Serviço alterado.";
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao alterar registro.");
 		}
 	}
@@ -61,7 +59,6 @@ public class ServicoRestController {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao ler registro.");
 		}
 	}
@@ -72,10 +69,8 @@ public class ServicoRestController {
 		try {
 			Fachada.getCurrentInstance().deletarServico(id);
 			
-//			return "Servico deletado.";
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao deletar registro.");
 		}
 	}
@@ -92,7 +87,6 @@ public class ServicoRestController {
 				return new ResponseEntity<List<Servico>>(servicos, HttpStatus.NOT_FOUND);	
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao ler registros.");
 		}
 	}

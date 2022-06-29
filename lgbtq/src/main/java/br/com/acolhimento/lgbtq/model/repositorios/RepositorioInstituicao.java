@@ -19,7 +19,6 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 
 	@Override
 	public int inserir(Instituicao instituicao) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "insert into instituicao"
 			+ "(cnpj, razao_social, horario_abertura, horario_fechamento, coordenada_id, endereco_id) "
@@ -44,7 +43,6 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 
 	@Override
 	public void alterar(Instituicao instituicao) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "update instituicao "
 			+ "set razao_social=?, horario_abertura=?, horario_fechamento=? "
@@ -91,7 +89,6 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 
 	@Override
 	public void deletar(String cnpj) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "delete from instituicao where cnpj=?";
 		

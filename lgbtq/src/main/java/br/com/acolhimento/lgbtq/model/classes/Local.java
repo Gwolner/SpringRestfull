@@ -70,8 +70,10 @@ public class Local {
 		return comentarios;
 	}
 
-	public void setComentarios(ComentarioLocal comentario) {
-		this.comentarios.add(comentario);
+	public void setComentarios(ArrayList<ComentarioLocal> comentarios) {
+		this.comentarios = comentarios;
 	}
+
+	
 	
 }

@@ -22,7 +22,7 @@ import br.com.acolhimento.lgbtq.model.repositorios.Fachada;
 public class AcolhidoRestController  {
 	
 	@PostMapping("/Acolhido")
-	public  ResponseEntity<?> inserir(@RequestBody Acolhido acolhido) {
+	public ResponseEntity<?> inserir(@RequestBody Acolhido acolhido) {
 		
 		int idCoordenada;
 		
@@ -33,14 +33,13 @@ public class AcolhidoRestController  {
 			
 			Fachada.getCurrentInstance().inserir(acolhido);
 			
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(acolhido.getCpf(), HttpStatus.OK);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao inserir registro.");
 		}
 		//Para outros casos de exceção  --- Pesquisar quais!
 //		catch (SQLException e) {
-//			// TODO Auto-generated catch block
 //			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao inserir registro.");
 //		}
 	}
@@ -62,7 +61,6 @@ public class AcolhidoRestController  {
 			Fachada.getCurrentInstance().alterar(acolhido);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -86,7 +84,6 @@ public class AcolhidoRestController  {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao ler registro.");
 		}
 	}
@@ -109,7 +106,6 @@ public class AcolhidoRestController  {
 			
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao deletar registro.");
 		}
 	}
@@ -131,7 +127,6 @@ public class AcolhidoRestController  {
 				return new ResponseEntity<List<Acolhido>>(acolhidos, HttpStatus.NOT_FOUND);	
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao ler registros.");
 		}
 	}

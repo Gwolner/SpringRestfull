@@ -20,8 +20,7 @@ public class RepositorioCoordenada implements Repositorio<Coordenada, Integer>{
 
 	@Override
 	public int inserir(Coordenada coordenada) throws SQLException {
-		// TODO Auto-generated method stub
-		
+
 		String sql = "insert into coordenada (latitude, longitude) values (?, ?)";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection()
@@ -44,7 +43,6 @@ public class RepositorioCoordenada implements Repositorio<Coordenada, Integer>{
 
 	@Override
 	public void alterar(Coordenada coordenada) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "update coordenada "
 					+ "set latitude=?, longitude=? "
@@ -61,9 +59,7 @@ public class RepositorioCoordenada implements Repositorio<Coordenada, Integer>{
 
 	@Override
 	public Coordenada ler(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
-		
-		//String sql = "select * from carro as c join tipocarro as t on (c.cod_tipocarro = t.codigo) where c.placa = ?";
+
 		String sql = "select * from coordenada where id = ?";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
@@ -89,7 +85,6 @@ public class RepositorioCoordenada implements Repositorio<Coordenada, Integer>{
 
 	@Override
 	public void deletar(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "delete from coordenada where id=?";
 		
@@ -102,9 +97,7 @@ public class RepositorioCoordenada implements Repositorio<Coordenada, Integer>{
 
 	@Override
 	public List<Coordenada> lerTudo() throws SQLException {
-		// TODO Auto-generated method stub
-		
-		//String sql = "select * from carro as c join tipocarro as t on (c.cod_tipocarro = t.codigo)";
+
 		String sql = "select * from coordenada";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);

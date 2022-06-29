@@ -3,6 +3,7 @@ package br.com.acolhimento.lgbtq.model.repositorios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,23 +20,28 @@ public class RepositorioServico implements Repositorio<Servico, Integer> {
 
 	@Override
 	public int inserir(Servico servico) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		String sql = "insert into servico (designacao) values (?)";
 
-		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection()
+				.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		
 		pstm.setString(1, servico.getDesignacao());
 		
-		if(pstm.execute()) {
-			return 1;
-		}else {
-			return 0;
-		}		
+		pstm.execute();
+		
+		int lastId = 0;
+		
+		final ResultSet rs = pstm.getGeneratedKeys();
+		if (rs.next()) {
+		    lastId = rs.getInt(1);
+		}
+		
+		return lastId;
 	}
 
 	@Override
-	public void alterar(Servico Servico) throws SQLException {
-		// TODO Auto-generated method stub
+	public void alterar(Servico Servico) throws SQLException {		
 
 		String sql = "update servico set designacao=? where id=?";
 
@@ -48,8 +54,7 @@ public class RepositorioServico implements Repositorio<Servico, Integer> {
 	}
 
 	@Override
-	public Servico ler(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
+	public Servico ler(Integer id) throws SQLException {		
 
 		String sql = "select * from servico where id = ?";
 
@@ -74,8 +79,7 @@ public class RepositorioServico implements Repositorio<Servico, Integer> {
 	}
 
 	@Override
-	public void deletar(Integer k) throws SQLException {
-		// TODO Auto-generated method stub
+	public void deletar(Integer k) throws SQLException {		
 
 		String sql = "delete from servico where id = ?";
 
@@ -89,8 +93,7 @@ public class RepositorioServico implements Repositorio<Servico, Integer> {
 
 	@Override
 	public List<Servico> lerTudo() throws SQLException {
-		// TODO Auto-generated method stub
-
+		
 		String sql = "select * from servico";
 
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);

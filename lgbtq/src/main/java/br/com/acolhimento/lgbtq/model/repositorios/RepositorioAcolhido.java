@@ -19,21 +19,10 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 
 	@Override
 	public int inserir(Acolhido acolhido) throws SQLException {
-		// TODO Auto-generated method stub
 		
-		String sql;
-		
-		if(acolhido.getCoordenada().getId() > 0) {
-			//Salva com ID da Coordenada
-			sql = "insert into acolhido "
-					+ "(cpf, rg, nome, tipo_contato, contato, data_nascimento, coordenada_id)"
-					+ "values (?,?,?,?,?,?,?)";
-		}else {
-			//Salva NULL para a Coordenada
-			sql = "insert into acolhido "
-					+ "(cpf, rg, nome, tipo_contato, contato, data_nascimento)"
-					+ "values (?,?,?,?,?,?)";
-		}		
+		String sql = "insert into acolhido "
+				+ "(cpf, rg, nome, tipo_contato, contato, data_nascimento, coordenada_id)"
+				+ "values (?,?,?,?,?,?,?)";		
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		
@@ -43,12 +32,7 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 		pstm.setString(4, acolhido.getTipoContato());
 		pstm.setString(5, acolhido.getContato());
 		pstm.setString(6, acolhido.getDataNascimento());
-		
-		//Adiciona o ID apenas se houver algum
-		if(acolhido.getCoordenada().getId() > 0) {
-			pstm.setInt(7, acolhido.getCoordenada().getId());
-		}
-		
+		pstm.setInt(7, acolhido.getCoordenada().getId());
 
 		if(pstm.execute()) {
 			return 1;
@@ -59,7 +43,6 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 
 	@Override
 	public void alterar(Acolhido acolhido) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "update acolhido "
 					+ "set rg=?, nome=?, tipo_contato=?, contato=?, data_nascimento=?"

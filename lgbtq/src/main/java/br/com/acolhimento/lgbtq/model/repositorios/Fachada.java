@@ -1,6 +1,7 @@
 package br.com.acolhimento.lgbtq.model.repositorios;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.acolhimento.lgbtq.model.classes.*;
@@ -15,9 +16,9 @@ public class Fachada {
 	private Repositorio<Local, Integer> rLocal = null;
 	private Repositorio<Instituicao, String> rInstituicao = null;
 	private Repositorio<Acolhido, String> rAcolhido = null;
-	private Repositorio<ComentarioInstituicao, Integer> rComentarioInstituicao = null;
-	private Repositorio<ComentarioLocal, Integer> rComentarioLocal = null;
-	private Repositorio<DescricaoServico, Integer> rDescricaoServico = null;
+	private RepositorioComentarioInstituicao rComentarioInstituicao = null;
+	private RepositorioComentarioLocal rComentarioLocal = null;
+	private Repositorio<Descricao, Integer> rDescricaoServico = null;
 	private Repositorio<Alerta, Integer> rAlerta = null;
 	
 	private Fachada() {
@@ -29,7 +30,7 @@ public class Fachada {
 		this.rAcolhido = new RepositorioAcolhido();
 		this.rComentarioInstituicao = new RepositorioComentarioInstituicao();
 		this.rComentarioLocal = new RepositorioComentarioLocal();
-		this.rDescricaoServico = new RepositorioDescricaoServico();
+		this.rDescricaoServico = new RepositorioDescricao();
 		this.rAlerta = new RepositorioAlerta();
 	}
 	
@@ -41,8 +42,8 @@ public class Fachada {
 	}
 	
 	// ################# SERVICO #################
-	public void inserir(Servico servico) throws SQLException {		
-		this.rServico.inserir(servico);
+	public int inserir(Servico servico) throws SQLException {		
+		return this.rServico.inserir(servico);
 	}
 	
 	public void alterar(Servico servico) throws SQLException {
@@ -110,8 +111,8 @@ public class Fachada {
 	
 	
 	// ################# LOCAL #################	
-	public void inserir(Local local) throws SQLException {
-		this.rLocal.inserir(local);
+	public int inserir(Local local) throws SQLException {
+		return this.rLocal.inserir(local);
 	}
 	
 	public void alterar(Local local) throws SQLException {
@@ -156,8 +157,8 @@ public class Fachada {
 	
 	
 	// ################# ACOLHIDO #################	
-	public void inserir(Acolhido inst) throws SQLException {
-		this.rAcolhido.inserir(inst);
+	public int inserir(Acolhido inst) throws SQLException {
+		return this.rAcolhido.inserir(inst);
 	}
 	
 	public void alterar(Acolhido inst) throws SQLException {
@@ -199,6 +200,14 @@ public class Fachada {
 		return this.rComentarioInstituicao.lerTudo();
 	}
 	
+	public ArrayList<ComentarioInstituicao> lerComentarioPorCnpjInstituicao(String cnpj) throws SQLException{
+		return this.rComentarioInstituicao.lerComentarioPorCnpjInstituicao(cnpj);
+	}
+	
+	public ArrayList<Descricao> lerDescricaoPorCnpjInstituicao(String cnpj) throws SQLException{
+		return this.rComentarioInstituicao.lerDescricaoPorCnpjInstituicao(cnpj);
+	}
+	
 	
 	
 	// ################# COMENTARIO LOCAL #################	
@@ -222,18 +231,22 @@ public class Fachada {
 		return this.rComentarioLocal.lerTudo();
 	}
 	
-	
-	
-	// ################# DESCRICAO SERVICO #################	
-	public void inserir(DescricaoServico descricao) throws SQLException {
-		this.rDescricaoServico.inserir(descricao);
+	public ArrayList<ComentarioLocal> lerComentarioPorIdLocal(int id) throws SQLException{
+		return this.rComentarioLocal.lerComentarioPorIdLocal(id);
 	}
 	
-	public void alterar(DescricaoServico descricao) throws SQLException {
+	
+	
+	// ################# DESCRICAO #################	
+	public int inserir(Descricao descricao) throws SQLException {
+		return this.rDescricaoServico.inserir(descricao);
+	}
+	
+	public void alterar(Descricao descricao) throws SQLException {
 		this.rDescricaoServico.alterar(descricao);
 	}
 	
-	public DescricaoServico lerDescricaoServico(int id) throws SQLException {
+	public Descricao lerDescricaoServico(int id) throws SQLException {
 		return this.rDescricaoServico.ler(id);
 	}
 	
@@ -241,15 +254,15 @@ public class Fachada {
 		this.rDescricaoServico.deletar(id);
 	}
 	
-	public List<DescricaoServico> lerTodasDescricoeServicos() throws SQLException{
+	public List<Descricao> lerTodasDescricoeServicos() throws SQLException{
 		return this.rDescricaoServico.lerTudo();
 	}
 	
 	
 	
 	// ################# ALERTA #################	
-	public void inserir(Alerta alerta) throws SQLException {
-		this.rAlerta.inserir(alerta);
+	public int inserir(Alerta alerta) throws SQLException {
+		return this.rAlerta.inserir(alerta);
 	}
 	
 	public void alterar(Alerta alerta) throws SQLException {

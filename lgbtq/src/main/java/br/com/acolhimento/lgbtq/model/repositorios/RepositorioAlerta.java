@@ -3,6 +3,7 @@ package br.com.acolhimento.lgbtq.model.repositorios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,34 +24,38 @@ public class RepositorioAlerta implements Repositorio<Alerta, Integer> {
 
 	@Override
 	public int inserir(Alerta alerta) throws SQLException {
-		// TODO Auto-generated method stub
 
+		int lastId = 0;
+		PreparedStatement pstm;
 		String sql = "insert into alerta"
-					+ "(status, acolhido, instituicao) "
+					+ "(status, acolhido_cpf, instituicao_cnpj) "
 					+ "values (?, ?, ?)";
 
-		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 		pstm.setString(1, alerta.getStatus());
 		pstm.setString(2, alerta.getAcolhido().getCpf());
 		pstm.setString(3, alerta.getInstituicao().getCnpj());
 		
-		if(pstm.execute()) {
-			return 1;
-		}else {
-			return 0;
-		}	
+		pstm.execute();	
+		
+		final ResultSet rs = pstm.getGeneratedKeys();
+		if (rs.next()) {
+			lastId = rs.getInt(1);
+		}
+
+		return lastId;
 	}
 
 	@Override
 	public void alterar(Alerta alerta) throws SQLException {
-		// TODO Auto-generated method stub
 
+		PreparedStatement pstm;
 		String sql = "update alerta "
 					+ "set status=?" 
 					+ "where id=?";
 
-		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 
 		pstm.setString(1, alerta.getStatus());
 		pstm.setInt(2, alerta.getId());
@@ -60,26 +65,40 @@ public class RepositorioAlerta implements Repositorio<Alerta, Integer> {
 
 	@Override
 	public Alerta ler(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
-
-		String sql = "select * from alerta where id = ?";
-
-		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		
+		Alerta alerta = null;
+		Acolhido acolhido;
+		Coordenada coord;
+		Instituicao instituicao;
+		Endereco ender;	
+		PreparedStatement pstm;
+		ResultSet result;
+		String sql = "SELECT alerta.id AS alerta_id, alerta.*, acolhido.*, coordenada.*, instituicao.*, endereco.* "
+					+ "FROM acolhido "
+					+ "INNER JOIN coordenada "
+					+ "ON acolhido.coordenada_id = coordenada.id "
+					+ "INNER JOIN alerta "
+					+ "ON acolhido.cpf = alerta.acolhido_cpf "
+					+ "INNER JOIN instituicao "
+					+ "ON alerta.instituicao_cnpj = instituicao.cnpj "
+					+ "INNER JOIN endereco "
+					+ "ON endereco.id = instituicao.endereco_id "
+					+ "WHERE alerta.id = ?";
+		
+		pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 
 		pstm.setInt(1, id);
 
-		ResultSet result = pstm.executeQuery();
-
-		Alerta alerta = null;
+		result = pstm.executeQuery();		
 
 		if (result.next()) {
-
+			
 			alerta = new Alerta();
 			
-			alerta.setId(result.getInt("id"));
+			alerta.setId(result.getInt("alerta_id"));
 			alerta.setStatus(result.getString("status"));
 			
-			Acolhido acolhido = new Acolhido();
+			acolhido = new Acolhido();
 			
 			acolhido.setCpf(result.getString("cpf"));			
 			acolhido.setRg(result.getString("rg"));
@@ -87,25 +106,27 @@ public class RepositorioAlerta implements Repositorio<Alerta, Integer> {
 			acolhido.setTipoContato(result.getString("tipo_contato"));
 			acolhido.setContato(result.getString("contato"));
 			acolhido.setDataNascimento(result.getString("data_nascimento"));
-//			acolhido.set
 				
-			Coordenada coord = new Coordenada();
+			coord = new Coordenada();
 			
-			coord.setId(result.getInt("id"));
+			coord.setId(result.getInt("coordenada_id"));
 			coord.setLatitude(result.getString("latitude"));
 			coord.setLongitude(result.getString("longitude"));
 				
 			acolhido.setCoordenada(coord);
 			
-			Instituicao instituicao = new Instituicao();
+			instituicao = new Instituicao();
 			instituicao.setCnpj(result.getString("cnpj"));
-			instituicao.setRazaoSocial(result.getString("razaoSocial"));
-			instituicao.setHorarioAbertura(result.getString("horarioAbertura"));
-			instituicao.setHorarioFechamento(result.getString("horarioFechamento"));
+			instituicao.setRazaoSocial(result.getString("razao_social"));
+			instituicao.setHorarioAbertura(result.getString("horario_abertura"));
+			instituicao.setHorarioFechamento(result.getString("horario_fechamento"));
+			instituicao.setCoordenada(null);
+			instituicao.setComentarios(null);
+//			instituicao.setDescricoes(null);
 
-			Endereco ender = new Endereco();
+			ender = new Endereco();
 			
-			ender.setId(result.getInt("id"));
+			ender.setId(result.getInt("endereco_id"));
 			ender.setLogradouro(result.getString("logradouro"));
 			ender.setNumero(result.getString("numero"));
 			ender.setBairro(result.getString("bairro"));
@@ -114,7 +135,7 @@ public class RepositorioAlerta implements Repositorio<Alerta, Integer> {
 			ender.setCep(result.getString("cep"));
 			
 			instituicao.setEndereco(ender);
-			
+
 			alerta.setAcolhido(acolhido);
 			alerta.setInstituicao(instituicao);
 		}
@@ -124,11 +145,11 @@ public class RepositorioAlerta implements Repositorio<Alerta, Integer> {
 
 	@Override
 	public void deletar(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
 
+		PreparedStatement pstm;
 		String sql = "delete from alerta where id = ?";
 
-		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 
 		pstm.setInt(1, id);
 
@@ -138,24 +159,40 @@ public class RepositorioAlerta implements Repositorio<Alerta, Integer> {
 
 	@Override
 	public List<Alerta> lerTudo() throws SQLException {
-		// TODO Auto-generated method stub
+		
+		Alerta alerta;
+		Acolhido acolhido;
+		Coordenada coord;
+		Instituicao instituicao;
+		Endereco ender;
+		PreparedStatement pstm;
+		ResultSet result;
+		List<Alerta> alertas;
+		String sql = "SELECT alerta.id AS alerta_id, alerta.*, acolhido.*, coordenada.*, instituicao.*, endereco.* "
+					+ "FROM acolhido "
+					+ "INNER JOIN coordenada "
+					+ "ON acolhido.coordenada_id = coordenada.id "
+					+ "INNER JOIN alerta "
+					+ "ON acolhido.cpf = alerta.acolhido_cpf "
+					+ "INNER JOIN instituicao "
+					+ "ON alerta.instituicao_cnpj = instituicao.cnpj "
+					+ "INNER JOIN endereco "
+					+ "ON endereco.id = instituicao.endereco_id ";
 
-		String sql = "select * from alerta";
+		pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 
-		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		result = pstm.executeQuery();
 
-		ResultSet result = pstm.executeQuery();
-
-		List<Alerta> alertas = new ArrayList<Alerta>();
+		alertas = new ArrayList<Alerta>();
 
 		while (result.next()) {
 
-			Alerta alerta = new Alerta();
+			alerta = new Alerta();
 			
-			alerta.setId(result.getInt("id"));
+			alerta.setId(result.getInt("alerta_id"));
 			alerta.setStatus(result.getString("status"));
 			
-			Acolhido acolhido = new Acolhido();
+			acolhido = new Acolhido();
 			
 			acolhido.setCpf(result.getString("cpf"));			
 			acolhido.setRg(result.getString("rg"));
@@ -164,23 +201,26 @@ public class RepositorioAlerta implements Repositorio<Alerta, Integer> {
 			acolhido.setContato(result.getString("contato"));
 			acolhido.setDataNascimento(result.getString("data_nascimento"));
 				
-			Coordenada coord = new Coordenada();
+			coord = new Coordenada();
 			
-			coord.setId(result.getInt("id"));
+			coord.setId(result.getInt("coordenada_id"));
 			coord.setLatitude(result.getString("latitude"));
 			coord.setLongitude(result.getString("longitude"));
 				
 			acolhido.setCoordenada(coord);
 			
-			Instituicao instituicao = new Instituicao();
+			instituicao = new Instituicao();
 			instituicao.setCnpj(result.getString("cnpj"));
-			instituicao.setRazaoSocial(result.getString("razaoSocial"));
-			instituicao.setHorarioAbertura(result.getString("horarioAbertura"));
-			instituicao.setHorarioFechamento(result.getString("horarioFechamento"));
-
-			Endereco ender = new Endereco();
+			instituicao.setRazaoSocial(result.getString("razao_social"));
+			instituicao.setHorarioAbertura(result.getString("horario_abertura"));
+			instituicao.setHorarioFechamento(result.getString("horario_fechamento"));
+			instituicao.setCoordenada(null);
+			instituicao.setComentarios(null);
+//			instituicao.setDescricoes(null);
 			
-			ender.setId(result.getInt("id"));
+			ender = new Endereco();
+			
+			ender.setId(result.getInt("endereco_id"));
 			ender.setLogradouro(result.getString("logradouro"));
 			ender.setNumero(result.getString("numero"));
 			ender.setBairro(result.getString("bairro"));

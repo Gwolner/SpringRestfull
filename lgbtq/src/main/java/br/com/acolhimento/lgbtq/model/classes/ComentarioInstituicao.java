@@ -4,6 +4,7 @@ public class ComentarioInstituicao {
 	
 	private int id;
 	private String texto;
+	private String cnpjInstituicao;
 	
 	public int getId() {
 		return id;
@@ -20,7 +21,13 @@ public class ComentarioInstituicao {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	
-	
+
+	public String getCnpjInstituicao() {
+		return cnpjInstituicao;
+	}
+
+	public void setCnpjInstituicao(String cnpjInstituicao) {
+		this.cnpjInstituicao = cnpjInstituicao;
+	}
 	
 }

@@ -3,6 +3,7 @@ package br.com.acolhimento.lgbtq.model.repositorios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,45 +20,33 @@ public class RepositorioLocal implements Repositorio<Local, Integer>{
 
 	@Override
 	public int inserir(Local local) throws SQLException {
-		// TODO Auto-generated method stub
 		
-		String sql;
+		int lastId = 0;
+		String sql = "insert into local "
+				+ "(nome, link, descricao, endereco_id, coordenada_id)"
+				+ "values (?,?,?,?,?)";		
 		
-		if(local.getCoordenada().getId() > 0) {
-			//Salva com ID da Coordenada
-			sql = "insert into local "
-					+ "(nome, link, descricao, endereco_id, coordenada_id)"
-					+ "values (?,?,?,?,?)";
-		}else {
-			//Salva NULL para a Coordenada
-			sql = "insert into local "
-					+ "(nome, link, descricao, endereco_id)"
-					+ "values (?,?,?,?)";
-		}		
-		
-		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection()
+				.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		
 		pstm.setString(1, local.getNome());
 		pstm.setString(2, local.getLink());
 		pstm.setString(3, local.getDescricao());
 		pstm.setInt(4, local.getEndereco().getId());
+		pstm.setInt(5, local.getCoordenada().getId());
 		
-		//Adiciona o ID apenas se houver algum
-		if(local.getCoordenada().getId() > 0) {
-			System.out.println("ID COORDENADA: "+local.getCoordenada().getId());
-			pstm.setInt(5, local.getCoordenada().getId());
+		pstm.execute();
+		
+		final ResultSet rs = pstm.getGeneratedKeys();
+		if (rs.next()) {
+		    lastId = rs.getInt(1);
 		}
 		
-		if(pstm.execute()) {
-			return 1;
-		}else {
-			return 0;
-		}	
+		return lastId;
 	}
 
 	@Override
 	public void alterar(Local local) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "update local "
 					+ "set nome=?, link=?, descricao=?"
@@ -107,7 +96,6 @@ public class RepositorioLocal implements Repositorio<Local, Integer>{
 
 	@Override
 	public void deletar(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "delete from local where id=?";
 		

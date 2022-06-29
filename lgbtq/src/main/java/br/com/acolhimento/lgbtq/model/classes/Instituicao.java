@@ -11,14 +11,14 @@ public class Instituicao {
 	private Coordenada coordenada;
 	private Endereco endereco;
 	private ArrayList<ComentarioInstituicao> comentarios;
-	private ArrayList<DescricaoServico> descricoes;
+	private ArrayList<Descricao> descricoes;
 	
 	
 	public Instituicao(){
 		this.coordenada = new Coordenada();
 		this.endereco = new Endereco();
 		this.comentarios = new ArrayList<ComentarioInstituicao>();
-		this.descricoes = new ArrayList<DescricaoServico>();
+		this.descricoes = new ArrayList<Descricao>();
 	}
 
 
@@ -26,83 +26,64 @@ public class Instituicao {
 		return cnpj;
 	}
 
-
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-
 
 	public String getRazaoSocial() {
 		return razaoSocial;
 	}
 
-
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
 	}
-
 
 	public String getHorarioAbertura() {
 		return horarioAbertura;
 	}
 
-
 	public void setHorarioAbertura(String horarioAbertura) {
 		this.horarioAbertura = horarioAbertura;
 	}
-
 
 	public String getHorarioFechamento() {
 		return horarioFechamento;
 	}
 
-
 	public void setHorarioFechamento(String horarioFechamento) {
 		this.horarioFechamento = horarioFechamento;
 	}
-
 
 	public Coordenada getCoordenada() {
 		return coordenada;
 	}
 
-
 	public void setCoordenada(Coordenada coordenada) {
 		this.coordenada = coordenada;
 	}
-
 
 	public Endereco getEndereco() {
 		return endereco;
 	}
 
-
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
-
+	
 	public ArrayList<ComentarioInstituicao> getComentarios() {
 		return comentarios;
 	}
 
-
-	public void setComentarios(ComentarioInstituicao comentario) {
-		this.comentarios.add(comentario);
+	public void setComentarios(ArrayList<ComentarioInstituicao> comentarios) {
+		this.comentarios = comentarios;
 	}
 
-
-	public ArrayList<DescricaoServico> getDescricoes() {
+	public ArrayList<Descricao> getDescricoes() {
 		return descricoes;
 	}
 
-
-	public void setDescricoes(DescricaoServico descricao) {
-		this.descricoes.add(descricao);
+	public void setDescricoes(ArrayList<Descricao> descricoes) {
+		this.descricoes = descricoes;
 	}
-	
-	
-	
-	
 
 }

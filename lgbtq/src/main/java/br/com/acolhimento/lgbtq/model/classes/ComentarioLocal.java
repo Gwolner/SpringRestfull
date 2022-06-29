@@ -5,6 +5,7 @@ public class ComentarioLocal {
 	private int id;
 	private String texto;
 	private int avaliacao;
+	private int idLocal;	
 	
 	public int getId() {
 		return id;
@@ -29,5 +30,15 @@ public class ComentarioLocal {
 	public void setAvaliacao(int avaliacao) {
 		this.avaliacao = avaliacao;
 	}
+
+	public int getIdLocal() {
+		return idLocal;
+	}
+
+	public void setIdLocal(int idLocal) {
+		this.idLocal = idLocal;
+	}
+
+	
 	
 }

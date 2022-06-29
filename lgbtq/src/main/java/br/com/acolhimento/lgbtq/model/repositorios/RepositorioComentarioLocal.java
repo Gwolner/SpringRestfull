@@ -19,15 +19,15 @@ public class RepositorioComentarioLocal implements Repositorio<ComentarioLocal, 
 
 	@Override
 	public int inserir(ComentarioLocal comentarioLocal) throws SQLException {
-		// TODO Auto-generated method stub
 
-		String sql = "insert into comentario_local(texto, avaliacao) values (?, ?)";
+		String sql = "insert into comentario_local(texto, avaliacao, local_id) values (?, ?, ?)";
 
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 
 		pstm.setString(1, comentarioLocal.getTexto());
 		pstm.setInt(2, comentarioLocal.getAvaliacao());
-
+		pstm.setInt(3, comentarioLocal.getIdLocal());
+		
 		if(pstm.execute()) {
 			return 1;
 		}else {
@@ -37,23 +37,25 @@ public class RepositorioComentarioLocal implements Repositorio<ComentarioLocal, 
 
 	@Override
 	public void alterar(ComentarioLocal comentarioLocal) throws SQLException {
-		// TODO Auto-generated method stub
 
-		String sql = "update comentario_local set texto=?, avaliacao=?" 
-					+ "where id=?";;
+		String sql = "update comentario_local set texto=?, avaliacao=? where id=?";
 
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 
 		pstm.setString(1, comentarioLocal.getTexto());
 		pstm.setInt(2, comentarioLocal.getAvaliacao());
+		
 		pstm.setInt(3, comentarioLocal.getId());
+		
+		System.out.println("getTexto: "+comentarioLocal.getTexto());
+		System.out.println("getAvaliacao: "+comentarioLocal.getAvaliacao());
+		System.out.println("getId: "+comentarioLocal.getId());
 
 		pstm.execute();
 	}
 
 	@Override
 	public ComentarioLocal ler(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
 
 		String sql = "select * from comentario_local where id = ?";
 
@@ -80,7 +82,6 @@ public class RepositorioComentarioLocal implements Repositorio<ComentarioLocal, 
 
 	@Override
 	public void deletar(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
 
 		String sql = "delete from comentario_local where id = ?";
 
@@ -94,7 +95,6 @@ public class RepositorioComentarioLocal implements Repositorio<ComentarioLocal, 
 
 	@Override
 	public List<ComentarioLocal> lerTudo() throws SQLException {
-		// TODO Auto-generated method stub
 
 		String sql = "select * from comentario_local";
 
@@ -111,6 +111,34 @@ public class RepositorioComentarioLocal implements Repositorio<ComentarioLocal, 
 			comentarioLocal.setId(result.getInt("id"));
 			comentarioLocal.setTexto(result.getString("texto"));
 			comentarioLocal.setAvaliacao(result.getInt("avaliacao"));
+
+			comentarios.add(comentarioLocal);
+
+		}
+
+		return comentarios;
+	}
+	
+	public ArrayList<ComentarioLocal> lerComentarioPorIdLocal(int id) throws SQLException {
+
+		String sql = "select * from comentario_local where local_id = ?";
+
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		
+		pstm.setInt(1, id);
+
+		ResultSet result = pstm.executeQuery();
+
+		ArrayList<ComentarioLocal> comentarios = new ArrayList<ComentarioLocal>();
+
+		while (result.next()) {
+
+			ComentarioLocal comentarioLocal = new ComentarioLocal();
+
+			comentarioLocal.setId(result.getInt("id"));
+			comentarioLocal.setTexto(result.getString("texto"));
+			comentarioLocal.setAvaliacao(result.getInt("avaliacao"));
+			comentarioLocal.setIdLocal(result.getInt("local_id"));
 
 			comentarios.add(comentarioLocal);
 
