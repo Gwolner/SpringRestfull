@@ -713,3 +713,10 @@ Para maiores detalhes, acesse os links abaixos:
 
 [Comentarios](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Comentarios.md). <br>
 [Descricao](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Descricao.md).
+
+## :white_check_mark: MR do Banco 
+
+Em verde, as entidades mais fortes do projeto.
+
+[Modelo Relacional](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/bd/mr_tcc_controller.png).
+
