@@ -329,28 +329,65 @@ Retorno:
 ```json
 {
   "cnpj":"34303323000176",
-  "razaoSocial":"Elfos S/A",
-  "horarioAbertura":"08:00",
-  "horarioFechamento":"18:00",
+  "razaoSocial":"Magos e bruxas S/A",
+  "horarioAbertura":"18:00",
+  "horarioFechamento":"06:00",
   "coordenada":{
     "id":20,
-    "longitude":"0",
-    "latitude":"0"
+    "longitude":"58.47853",
+    "latitude":"98.75841"
   },
   "endereco":{
     "id":19,
-    "logradouro":"Av. Anaquin Scaiuauquer",
-    "numero":"302",
-    "bairro":"Maranguape",
-    "cidade":"Fromhell",
+    "logradouro":"Av. Imbiribeira",
+    "numero":"22",
+    "bairro":"Afogados",
+    "cidade":"Calypso",
     "estado":"PE",
     "cep":"88.170-009"
   },
   "comentarios":[
-    
+    {
+      "id":1,
+      "texto":"Instituicao teste 3",
+      "cnpjInstituicao":"34303323000176"
+    },
+    {
+      "id":2,
+      "texto":"Instituicao teste 8",
+      "cnpjInstituicao":"34303323000176"
+    },
+    {
+      "id":4,
+      "texto":"Instituicao teste 58",
+      "cnpjInstituicao":"34303323000176"
+    }
   ],
   "descricoes":[
-    
+    {
+      "id":1,
+      "descricao":"Descrição com qualquer texto aqui!!",
+      "instituicao":null,
+      "servico":null
+    },
+    {
+      "id":2,
+      "descricao":"SERVICO DE APOIO",
+      "instituicao":null,
+      "servico":null
+    },
+    {
+      "id":4,
+      "descricao":"Descrição com qualquer texto aqui!!",
+      "instituicao":null,
+      "servico":null
+    },
+    {
+      "id":5,
+      "descricao":"Descrição com qualquer texto aqui!!",
+      "instituicao":null,
+      "servico":null
+    }
   ]
 }
 ```
@@ -469,3 +506,203 @@ Retorno:
 
 ### Deletar `DELETE` | `/Instituicao/{cnpj}`
 
+## :white_check_mark: Alerta
+
+### Inserir `POST` | `/Alerta/{cpf}/{cnpj}`
+
+Enviar: 
+```json
+{
+  "cnpj":"34303323000176",
+  "razaoSocial":"Magos e bruxas S/A",
+  "horarioAbertura":"18:00",
+  "horarioFechamento":"06:00",
+  "coordenada":{
+    "id":20,
+    "longitude":"58.47853",
+    "latitude":"98.75841"
+  },
+  "endereco":{
+    "id":19,
+    "logradouro":"Av. Imbiribeira",
+    "numero":"22",
+    "bairro":"Afogados",
+    "cidade":"Calypso",
+    "estado":"PE",
+    "cep":"88.170-009"
+  },
+  "comentarios":[
+    {
+      "id":1,
+      "texto":"Instituicao teste 3",
+      "cnpjInstituicao":"34303323000176"
+    },
+    {
+      "id":2,
+      "texto":"Instituicao teste 8",
+      "cnpjInstituicao":"34303323000176"
+    },
+    {
+      "id":4,
+      "texto":"Instituicao teste 58",
+      "cnpjInstituicao":"34303323000176"
+    }
+  ],
+  "descricoes":[
+    {
+      "id":1,
+      "descricao":"Descrição com qualquer texto aqui!!",
+      "instituicao":null,
+      "servico":null
+    },
+    {
+      "id":2,
+      "descricao":"SERVICO DE APOIO",
+      "instituicao":null,
+      "servico":null
+    },
+    {
+      "id":4,
+      "descricao":"Descrição com qualquer texto aqui!!",
+      "instituicao":null,
+      "servico":null
+    },
+    {
+      "id":5,
+      "descricao":"Descrição com qualquer texto aqui!!",
+      "instituicao":null,
+      "servico":null
+    }
+  ]
+}
+```
+
+### Ler `GET` | `/Alerta/{id}`
+
+Retorno:
+```json
+{
+  "id":1,
+  "status":"Novela",
+  "acolhido":{
+    "cpf":"111.111.111-11",
+    "rg":"8.147.595",
+    "nome":"Bruce Wayne",
+    "tipoContato":"Telegram",
+    "contato":"(87)945875236",
+    "dataNascimento":"12/05/1996",
+    "coordenada":{
+      "id":11,
+      "longitude":"53.1262",
+      "latitude":"17.1256"
+    }
+  },
+  "instituicao":{
+    "cnpj":"34303323000178",
+    "razaoSocial":"Elfos S/A",
+    "horarioAbertura":"08:00",
+    "horarioFechamento":"18:00",
+    "coordenada":null,
+    "endereco":{
+      "id":22,
+      "logradouro":"Av. Anaquin Scaiuauquer",
+      "numero":"302",
+      "bairro":"Maranguape",
+      "cidade":"Fromhell",
+      "estado":"PE",
+      "cep":"88.170-009"
+    },
+    "comentarios":null,
+    "descricoes":null
+  }
+}
+```
+
+### Atualizar `PUT` | `/Alerta`
+
+Enviar: 
+```json
+{
+  "id":"1",
+  "status":"Novela"
+}
+```
+
+### Ler Todos `GET` | `/Alertas`
+Retorno:
+```json
+[
+  {
+    "id":1,
+    "status":"Novela",
+    "acolhido":{
+      "cpf":"111.111.111-11",
+      "rg":"8.147.595",
+      "nome":"Bruce Wayne",
+      "tipoContato":"Telegram",
+      "contato":"(87)945875236",
+      "dataNascimento":"12/05/1996",
+      "coordenada":{
+        "id":11,
+        "longitude":"53.1262",
+        "latitude":"17.1256"
+      }
+    },
+    "instituicao":{
+      "cnpj":"34303323000178",
+      "razaoSocial":"Elfos S/A",
+      "horarioAbertura":"08:00",
+      "horarioFechamento":"18:00",
+      "coordenada":null,
+      "endereco":{
+        "id":22,
+        "logradouro":"Av. Anaquin Scaiuauquer",
+        "numero":"302",
+        "bairro":"Maranguape",
+        "cidade":"Fromhell",
+        "estado":"PE",
+        "cep":"88.170-009"
+      },
+      "comentarios":null,
+      "descricoes":null
+    }
+  },
+  {
+    "id":2,
+    "status":"Tapera",
+    "acolhido":{
+      "cpf":"111.111.111-11",
+      "rg":"8.147.595",
+      "nome":"Bruce Wayne",
+      "tipoContato":"Telegram",
+      "contato":"(87)945875236",
+      "dataNascimento":"12/05/1996",
+      "coordenada":{
+        "id":11,
+        "longitude":"53.1262",
+        "latitude":"17.1256"
+      }
+    },
+    "instituicao":{
+      "cnpj":"34303323000178",
+      "razaoSocial":"Elfos S/A",
+      "horarioAbertura":"08:00",
+      "horarioFechamento":"18:00",
+      "coordenada":null,
+      "endereco":{
+        "id":22,
+        "logradouro":"Av. Anaquin Scaiuauquer",
+        "numero":"302",
+        "bairro":"Maranguape",
+        "cidade":"Fromhell",
+        "estado":"PE",
+        "cep":"88.170-009"
+      },
+      "comentarios":null,
+      "descricoes":null
+    }
+  }
+]
+```
+
+### Deletar `DELETE` | `/Alerta/{id}`
