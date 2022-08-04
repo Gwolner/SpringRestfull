@@ -720,3 +720,9 @@ Em verde, as entidades mais fortes do projeto.
 
 [Modelo Relacional](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/bd/mr_tcc_controller.png).
 
+## :white_check_mark: Autenticação de usuários 
+
+Autenticação usada para Acolhido e Instituicao.
+
+[Acolhido](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Comentarios.md). <br>
+[Instituicao](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Descricao.md).
