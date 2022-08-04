@@ -724,5 +724,5 @@ Em verde, as entidades mais fortes do projeto.
 
 Autenticação usada para Acolhido e Instituicao.
 
-[Acolhido](https://github.com/Gwolner/spring-restfull/blob/versao_2.0_Autenticacao_sistema/Comentarios.md). <br>
-[Instituicao](https://github.com/Gwolner/spring-restfull/blob/versao_2.0_Autenticacao_sistema/Descricao.md).
+[Acolhido](https://github.com/Gwolner/spring-restfull/blob/versao_2.0_Autenticacao_sistema/Autenticacao_Acolhido.md). <br>
+[Instituicao - EM DESENVOLVIMENTO!!](https://github.com/Gwolner/spring-restfull/blob/versao_2.0_Autenticacao_sistema/Autenticacao_Instituicao.md).
