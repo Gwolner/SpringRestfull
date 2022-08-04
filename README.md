@@ -711,18 +711,18 @@ Retorno:
 
 Para maiores detalhes, acesse os links abaixos:
 
-[Comentarios](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Comentarios.md). <br>
-[Descricao](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Descricao.md).
+[Comentarios](https://github.com/Gwolner/spring-restfull/blob/versao_2.0_Autenticacao_sistema/Comentarios.md). <br>
+[Descricao](https://github.com/Gwolner/spring-restfull/blob/versao_2.0_Autenticacao_sistema/Descricao.md).
 
 ## :white_check_mark: MR do Banco 
 
 Em verde, as entidades mais fortes do projeto.
 
-[Modelo Relacional](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/bd/mr_tcc_controller.png).
+[Modelo Relacional](https://github.com/Gwolner/spring-restfull/blob/versao_2.0_Autenticacao_sistema/bd/mr_tcc_controller.png).
 
 ## :white_check_mark: Autenticação de usuários 
 
 Autenticação usada para Acolhido e Instituicao.
 
-[Acolhido](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Comentarios.md). <br>
-[Instituicao](https://github.com/Gwolner/spring-restfull/blob/versao_1.0/Descricao.md).
+[Acolhido](https://github.com/Gwolner/spring-restfull/blob/versao_2.0_Autenticacao_sistema/Comentarios.md). <br>
+[Instituicao](https://github.com/Gwolner/spring-restfull/blob/versao_2.0_Autenticacao_sistema/Descricao.md).
