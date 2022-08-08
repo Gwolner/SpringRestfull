@@ -22,17 +22,19 @@ import br.com.acolhimento.lgbtq.model.classes.Endereco;
 import br.com.acolhimento.lgbtq.model.classes.Instituicao;
 import br.com.acolhimento.lgbtq.model.classes.Servico;
 import br.com.acolhimento.lgbtq.model.repositorios.Fachada;
+import br.com.acolhimento.lgbtq.util.Criptografia;
 
 @RestController
 public class InstituicaoRestController {
 
 	@PostMapping("/Instituicao")
-	public ResponseEntity<?> inserir(@RequestBody Instituicao instituicao) {
+	public ResponseEntity<?> inserir(@RequestBody Instituicao instituicao) throws Exception {
 
 		int idCoordenada;
 		int idEndereco;
 
-		try {
+		try {			
+			instituicao.setSenha(Criptografia.gerarHash(instituicao.getSenha()));
 
 			idCoordenada = Fachada.getCurrentInstance().inserir(instituicao.getCoordenada());
 			idEndereco = Fachada.getCurrentInstance().inserir(instituicao.getEndereco());
@@ -46,10 +48,6 @@ public class InstituicaoRestController {
 		} catch (SQLException e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao inserir registro.");
 		}
-		// Para outros casos de exceção --- Pesquisar quais!
-//		catch (SQLException e) {
-//			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao inserir registro.");
-//		}
 	}
 
 	@PutMapping("/Instituicao")
@@ -241,10 +239,6 @@ public class InstituicaoRestController {
 		} catch (SQLException e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao inserir registro.");
 		}
-		// Para outros casos de exceção --- Pesquisar quais!
-//		catch (SQLException e) {
-//			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao inserir registro.");
-//		}
 	}
 	
 	// READ
@@ -290,6 +284,29 @@ public class InstituicaoRestController {
 			}
 		} catch (SQLException e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao ler registros.");
+		}
+	}
+	
+	// ###################################### AUTENTICACAO ######################################
+	
+	@PostMapping("/Instituicao/Auth")
+	public ResponseEntity<String> autenticarInstituicao(@RequestBody Instituicao instituicao) throws Exception{		
+		
+		String cnpjInstituicao = "0";
+		
+		try {
+			instituicao.setSenha(Criptografia.gerarHash(instituicao.getSenha()));
+			
+			cnpjInstituicao = Fachada.getCurrentInstance().autenticacaoInstituicao(instituicao.getEmail(), instituicao.getSenha());			
+			
+			if(cnpjInstituicao != "0") {
+				return new ResponseEntity<String>(cnpjInstituicao, HttpStatus.OK);	
+			}else {
+				return new ResponseEntity<String>("Acesso negado", HttpStatus.NOT_FOUND);	
+			}
+			
+		} catch (SQLException e) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao ler registro.");
 		}
 	}
 }

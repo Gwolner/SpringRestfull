@@ -21,8 +21,8 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 	public int inserir(Acolhido acolhido) throws SQLException {
 		
 		String sql = "insert into acolhido "
-				+ "(cpf, rg, nome, tipo_contato, contato, data_nascimento, coordenada_id)"
-				+ "values (?,?,?,?,?,?,?)";		
+				+ "(cpf, rg, nome, tipo_contato, contato, data_nascimento, coordenada_id, email, senha)"
+				+ "values (?,?,?,?,?,?,?,?,?)";		
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		
@@ -33,6 +33,8 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 		pstm.setString(5, acolhido.getContato());
 		pstm.setString(6, acolhido.getDataNascimento());
 		pstm.setInt(7, acolhido.getCoordenada().getId());
+		pstm.setString(8, acolhido.getEmail());
+		pstm.setString(9, acolhido.getSenha());
 
 		if(pstm.execute()) {
 			return 1;
@@ -45,7 +47,7 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 	public void alterar(Acolhido acolhido) throws SQLException {
 		
 		String sql = "update acolhido "
-					+ "set rg=?, nome=?, tipo_contato=?, contato=?, data_nascimento=?"
+					+ "set rg=?, nome=?, tipo_contato=?, contato=?, data_nascimento=?, email=?, senha=?"
 					+ "where cpf=?";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
@@ -55,8 +57,10 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 		pstm.setString(3, acolhido.getTipoContato());
 		pstm.setString(4, acolhido.getContato());
 		pstm.setString(5, acolhido.getDataNascimento());
+		pstm.setString(6, acolhido.getEmail());
+		pstm.setString(7, acolhido.getSenha());
 		
-		pstm.setString(6, acolhido.getCpf());
+		pstm.setString(8, acolhido.getCpf());
 		
 		pstm.execute();
 	}
@@ -84,6 +88,7 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 			acolhido.setTipoContato(result.getString("tipo_contato"));
 			acolhido.setContato(result.getString("contato"));
 			acolhido.setDataNascimento(result.getString("data_nascimento"));
+			acolhido.setEmail(result.getString("email"));
 			
 			if(result.getObject("coordenada_id") != null) {
 				acolhido.getCoordenada().setId(result.getInt("coordenada_id"));
@@ -125,6 +130,7 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 			acolhido.setTipoContato(result.getString("tipo_contato"));
 			acolhido.setContato(result.getString("contato"));
 			acolhido.setDataNascimento(result.getString("data_nascimento"));
+			acolhido.setEmail(result.getString("email"));
 			
 			if(result.getObject("coordenada_id") != null) {
 				acolhido.getCoordenada().setId(result.getInt("coordenada_id"));
@@ -134,4 +140,34 @@ public class RepositorioAcolhido implements Repositorio<Acolhido, String>{
 		}
 		return acolhidos;
 	}
+	
+	public String autenticacaoAcolhido(String email, String senha) throws SQLException {
+		
+		String sql = "select cpf from acolhido where email = ? and senha = ?";
+		
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		
+		pstm.setString(1, email);
+		pstm.setString(2, senha);
+		
+		ResultSet result = pstm.executeQuery();
+		
+		Acolhido acolhido = null;
+		
+		if(result.next()) {
+			
+			acolhido = new Acolhido();
+			
+			acolhido.setCpf(result.getString("cpf"));
+			
+		}	
+		
+		if(acolhido != null) {
+			return acolhido.getCpf();
+		}else {
+			return "0";
+		}
+		
+	}
+
 }

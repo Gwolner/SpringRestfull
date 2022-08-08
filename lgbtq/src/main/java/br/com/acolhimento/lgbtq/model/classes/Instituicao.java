@@ -13,6 +13,8 @@ public class Instituicao {
 	private ArrayList<ComentarioInstituicao> comentarios;
 	private ArrayList<Descricao> descricoes;
 	
+	private String email;
+	private String senha;	
 	
 	public Instituicao(){
 		this.coordenada = new Coordenada();
@@ -86,4 +88,20 @@ public class Instituicao {
 		this.descricoes = descricoes;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
 }

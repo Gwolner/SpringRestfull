@@ -44,10 +44,6 @@ public class AlertaRestController {
 		} catch (SQLException e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao inserir registro.");
 		}
-		// Para outros casos de exceção --- Pesquisar quais!
-//		catch (SQLException e) {
-//			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao inserir registro.");
-//		}
 	}
 
 	@PutMapping("/Alerta")

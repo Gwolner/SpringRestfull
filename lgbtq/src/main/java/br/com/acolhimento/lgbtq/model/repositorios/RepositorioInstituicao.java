@@ -21,8 +21,8 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 	public int inserir(Instituicao instituicao) throws SQLException {
 		
 		String sql = "insert into instituicao"
-			+ "(cnpj, razao_social, horario_abertura, horario_fechamento, coordenada_id, endereco_id) "
-			+ "values (?,?,?,?,?,?)";
+			+ "(cnpj, razao_social, horario_abertura, horario_fechamento, coordenada_id, endereco_id, email, senha) "
+			+ "values (?,?,?,?,?,?,?,?)";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		
@@ -32,6 +32,8 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 		pstm.setString(4, instituicao.getHorarioFechamento());
 		pstm.setInt(5, instituicao.getCoordenada().getId());
 		pstm.setInt(6, instituicao.getEndereco().getId());
+		pstm.setString(7, instituicao.getEmail());
+		pstm.setString(8, instituicao.getSenha());
 		
 		if(pstm.execute()) {
 			return 1;
@@ -45,7 +47,7 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 	public void alterar(Instituicao instituicao) throws SQLException {
 		
 		String sql = "update instituicao "
-			+ "set razao_social=?, horario_abertura=?, horario_fechamento=? "
+			+ "set razao_social=?, horario_abertura=?, horario_fechamento=?, email=?, senha=?"
 			+ "where cnpj=?";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
@@ -53,7 +55,10 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 		pstm.setString(1, instituicao.getRazaoSocial());
 		pstm.setString(2, instituicao.getHorarioAbertura());
 		pstm.setString(3, instituicao.getHorarioFechamento());
-		pstm.setString(4, instituicao.getCnpj());
+		pstm.setString(4, instituicao.getEmail());
+		pstm.setString(5, instituicao.getSenha());
+		
+		pstm.setString(6, instituicao.getCnpj());
 		
 		pstm.execute();
 	}
@@ -80,6 +85,7 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 			instituicao.setHorarioFechamento(result.getString("horario_fechamento"));
 			instituicao.getCoordenada().setId(result.getInt("coordenada_id"));
 			instituicao.getEndereco().setId(result.getInt("endereco_id"));
+			instituicao.setEmail(result.getString("email"));
 		}
 		
 		System.out.println("instituicao: "+instituicao.getCnpj());
@@ -120,10 +126,40 @@ public class RepositorioInstituicao  implements Repositorio<Instituicao, String>
 			instituicao.setHorarioFechamento(result.getString("horario_fechamento"));
 			instituicao.getCoordenada().setId(result.getInt("coordenada_id"));
 			instituicao.getEndereco().setId(result.getInt("endereco_id"));
+			instituicao.setEmail(result.getString("email"));
 
 			instituicoes.add(instituicao);
 		}
 		
 		return instituicoes;
+	}
+	
+	public String autenticacaoInstituicao(String email, String senha) throws SQLException {
+		
+		String sql = "select cnpj from instituicao where email = ? and senha = ?";
+		
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		
+		pstm.setString(1, email);
+		pstm.setString(2, senha);
+		
+		ResultSet result = pstm.executeQuery();
+		
+		Instituicao instituicao = null;
+		
+		if(result.next()) {
+			
+			instituicao = new Instituicao();
+			
+			instituicao.setCnpj(result.getString("cnpj"));
+			
+		}	
+		
+		if(instituicao != null) {
+			return instituicao.getCnpj();
+		}else {
+			return "0";
+		}
+		
 	}
 }

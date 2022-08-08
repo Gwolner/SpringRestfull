@@ -14,8 +14,8 @@ public class Fachada {
 	private Repositorio<Endereco, Integer> rEndereco = null;
 	private Repositorio<Coordenada, Integer> rCoordenada = null;
 	private Repositorio<Local, Integer> rLocal = null;
-	private Repositorio<Instituicao, String> rInstituicao = null;
-	private Repositorio<Acolhido, String> rAcolhido = null;
+	private RepositorioInstituicao rInstituicao = null;
+	private RepositorioAcolhido rAcolhido = null;
 	private RepositorioComentarioInstituicao rComentarioInstituicao = null;
 	private RepositorioComentarioLocal rComentarioLocal = null;
 	private Repositorio<Descricao, Integer> rDescricaoServico = null;
@@ -154,6 +154,10 @@ public class Fachada {
 		return this.rInstituicao.lerTudo();
 	}
 	
+	public String autenticacaoInstituicao(String email, String senha) throws SQLException{		
+		return this.rInstituicao.autenticacaoInstituicao(email, senha);
+	}
+	
 	
 	
 	// ################# ACOLHIDO #################	
@@ -175,6 +179,10 @@ public class Fachada {
 	
 	public List<Acolhido> lerTodosAcolhidos() throws SQLException{
 		return this.rAcolhido.lerTudo();
+	}	
+	
+	public String autenticacaoAcolhido(String email, String senha) throws SQLException{		
+		return this.rAcolhido.autenticacaoAcolhido(email, senha);
 	}	
 	
 	

@@ -10,6 +10,9 @@ public class Acolhido {
 	private String dataNascimento;
 	private Coordenada coordenada;
 	
+	private String email;
+	private String senha;
+	
 	public Acolhido() {
 		this.coordenada = new Coordenada();
 	}
@@ -69,6 +72,21 @@ public class Acolhido {
 	public void setCoordenada(Coordenada coordenada) {
 		this.coordenada = coordenada;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}	
 	
 }
