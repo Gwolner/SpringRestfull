@@ -9,3 +9,6 @@ Enviar:
   "senha":"temias"
 }
 ```
+
+**Observação 1:** Se a autenticação estiver correta, o servidor irá devolver o CNPJ do usuário Instituicao. <br>
+**Observação 2:** Se a autenticação estiver errada, o servidor irá devolver a mensagem "Acesso negado".
